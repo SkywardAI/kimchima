@@ -1,0 +1,6 @@
+exclude kimchi.yml
+exclude Makefile
+exclude .vscode
+exclude .gitignore
+exclude LICENSE
+recursive-exclude params *

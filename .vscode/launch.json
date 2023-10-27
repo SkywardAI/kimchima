@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Test model - Debbug kimchi",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/kimchi.py",
+            "console": "integratedTerminal",
+            "purpose": [
+                "debug-in-terminal"
+            ],
+            "justMyCode": true,
+            "args": [
+                "test",
+                "${env:HOME}//Downloads/workspace/llama/llama-2-7b-chat",
+                "${env:HOME}//Downloads/workspace/llama/tokenizer.model"
+            ]
+        },
+        {
+            "name": "Dump model - Debbug kimchi",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/kimchi.py",
+            "console": "integratedTerminal",
+            "purpose": [
+                "debug-in-terminal"
+            ],
+            "justMyCode": true,
+            "args": [
+                "dump",
+                "${env:HOME}//Downloads/workspace/llama/llama-2-7b-chat",
+                "${env:HOME}//Downloads/workspace/llama/tokenizer.model"
+            ]
+        }
+    ]
+}
