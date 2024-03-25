@@ -25,6 +25,11 @@ kimchi dump <model_dir> <tokenizer_path>
 python3 kimchi.py dump <model_dir> <tokenizer_path>
 ```
 
+```
+pip install torch==2.2.1
+pip install sentencepiece==0.2.0
+pip install transformers==4.39.1
+```
 
 # Credits
 - [Llama2-burn Project](https://github.com/Gadersd/llama2-burn/tree/main)
