@@ -9,3 +9,7 @@ setup:
 .PHONY: upload
 upload:
 	twine upload dist/*
+
+.PHONY: export
+export:
+	conda env export > kimchi.yml
