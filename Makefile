@@ -12,12 +12,11 @@ setup:
 
 .PHONY: upload
 upload:
-	twine upload dist/*
+	twine upload dist/* --verbose
 
-.PHONY: export
-export:
+.PHONY: exportenv
+exportenv:
 	conda env export > kimchi.yml
-
 
 .PHONY: exit
 exit:
