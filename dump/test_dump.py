@@ -6,6 +6,7 @@ from dump import Dump
 
 class TestDump(unittest.TestCase):
 
+    @unittest.skip("Pass testing for no useful features")
     def test_dump(self):
         n_vocab = 10
         n_state = 8

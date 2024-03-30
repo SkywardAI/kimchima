@@ -35,6 +35,21 @@
                 "${env:HOME}//Downloads/workspace/llama/llama-2-7b-chat",
                 "${env:HOME}//Downloads/workspace/llama/tokenizer.model"
             ]
+        },
+        {
+            "name": "Auto - Debbug kimchi",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/kimchi.py",
+            "console": "integratedTerminal",
+            "purpose": [
+                "debug-in-terminal"
+            ],
+            "justMyCode": true,
+            "args": [
+                "auto",
+                "sentence-transformers/all-MiniLM-L6-v2"
+            ]
         }
     ]
 }
