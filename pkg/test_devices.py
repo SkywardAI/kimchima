@@ -2,7 +2,7 @@ import unittest
 import platform
 import torch
 
-from devices import Devices, get_device
+from pkg.devices import Devices, get_device
 
 class TestDevices(unittest.TestCase):
 

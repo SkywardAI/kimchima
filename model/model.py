@@ -377,7 +377,6 @@ class TransformerBlock(nn.Module):
         return out
 
 
-
 class Transformer(nn.Module):
     """
     A Transformer model for sequence-to-sequence tasks.

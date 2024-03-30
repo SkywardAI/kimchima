@@ -21,9 +21,13 @@ export:
 
 .PHONY: exit
 exit:
-	conda init
 	conda deactivate
 
 .PHONY: remove
 remove:
 	conda env remove --name kimchi -y
+
+
+.PHONY: test
+test:
+	@python -m unittest -v
