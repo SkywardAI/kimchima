@@ -1,6 +1,7 @@
 import unittest
-import tokenizer
 import os
+
+from pkg.tokenizer import tokenizer
 
 class TestTokenizer(unittest.TestCase):
     

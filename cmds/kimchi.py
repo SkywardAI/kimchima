@@ -1,6 +1,6 @@
 import argparse
 
-from subcomands import *
+from cmds.auto import CommandAuto
 
 
 
