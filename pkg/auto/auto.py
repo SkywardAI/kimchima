@@ -71,7 +71,7 @@ class Auto:
             sentence_embeddings=None
         return sentence_embeddings
 
-    @staticmethod
+    @classmethod
     #Mean Pooling - Take attention mask into account for correct averaging
     def mean_pooling(model_output, attention_mask):
         token_embeddings = model_output[0] #First element of model_output contains all token embeddings

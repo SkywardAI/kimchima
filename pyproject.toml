@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/Aisuko/kimchi"
 repository = "https://github.com/Aisuko/kimchi"
-keywords = ["packaging", "poetry"]
+keywords = ["ai", "llm"]
 
 packages = [
     { include = "pkg" },
@@ -26,11 +26,6 @@ torch = "2.2.2"
 transformers = "4.39.2"
 sentencepiece = "0.2.0"
 
-
-[[tool.poetry.source]]
-name = "kimchima"
-url = "https://pypi.org/project/kimchima/"
-priority = "primary"
 
 [build-system]
 requires = ["poetry-core"]

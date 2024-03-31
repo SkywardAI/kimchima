@@ -3,13 +3,13 @@ import argparse
 from cmds.auto import CommandAuto
 
 
-
 def main():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(help="sub-command help")
 
     parser_command_auto=subparsers.add_parser("auto", help="auto help")
     parser_command_auto.add_argument("model_name_or_path", help="model name or path")
+    parser_command_auto.add_argument("text", help="text str or list of text str")
     parser_command_auto.set_defaults(func=CommandAuto.auto)
 
     # parser_command_test=subparsers.add_parser("test", help="test help")

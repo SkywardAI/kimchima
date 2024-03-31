@@ -12,7 +12,7 @@ test:
 	@python -m unittest -v
 
 
-################################poetry################################
+################################Poetry################################
 .PHONY: poetry
 poetry:
 	@pipx install poetry==1.8.2
@@ -25,7 +25,7 @@ build:
 
 .PHONY: install
 install:
-	@poetry install
+	@poetry install -vvv
 
 
 # build and publish
@@ -33,10 +33,12 @@ install:
 publish:
 	@poetry publish --build
 
+
 # list current configuration
 .PHONY: config
 config:
 	@poetry config --list
+
 
 .PHONY: source
 source:

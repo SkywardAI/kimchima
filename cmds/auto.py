@@ -1,13 +1,11 @@
-from pkg.auto import Auto
+from pkg import Auto
 
 
 class CommandAuto:
 
-    @staticmethod
+    @classmethod
     def auto(args):
         model = Auto(model_name_or_path=args.model_name_or_path)
-        embeddings = model.get_embeddings(text='Melbourne')
-        print(embeddings)
-        embeddings = model.get_embeddings(text=['Melbourne', 'Sydney'])
-        print(embeddings)
+        embeddings = model.get_embeddings(args.text)
         return embeddings
+
