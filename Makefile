@@ -45,6 +45,11 @@ source:
 	@poetry config repositories.source https://pypi.org/project/kimchima
 
 
+.PHONY: credentials
+config:
+	@poetry config pypi-token.pypi ${TOKEN}
+
+
 ###################################################################################################
 # Commit and recommit changes to github
 .PONY: commit
