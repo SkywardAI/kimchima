@@ -1,1 +1,1 @@
-
+from pkg.model.model import *

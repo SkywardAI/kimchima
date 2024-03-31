@@ -1,6 +1,6 @@
 import unittest
 import torch
-from model import Transformer, ModelArgs
+from pkg.model import Transformer, ModelArgs
 
 from pkg.dump import Dump
 

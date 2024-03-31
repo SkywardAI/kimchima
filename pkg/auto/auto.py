@@ -34,6 +34,9 @@ class Auto:
         
         Args:
             model_name_or_path (str): The model name or path of model.
+        
+        Returns:
+            None
         """
         model_name_or_path = kwargs.pop('model_name_or_path', None)
         if model_name_or_path is None:
@@ -51,6 +54,9 @@ class Auto:
             text (str): The text to get embeddings.
             device (str): The device to use. Default is 'cpu'.
             max_length (int): The maximum length of text. Default is 512.
+
+        Returns:
+            torch.tensor: The embeddings of text.
         """
         try:
             text = kwargs.pop('text', None)
@@ -71,9 +77,19 @@ class Auto:
             sentence_embeddings=None
         return sentence_embeddings
 
-    @classmethod
+    @staticmethod
     #Mean Pooling - Take attention mask into account for correct averaging
     def mean_pooling(model_output, attention_mask):
+        """
+        Mean pooling of model output.
+
+        Args:
+            model_output (torch.tensor): The model output.
+            attention_mask (torch.tensor): The attention mask.
+
+        Returns:
+            torch.tensor: The mean pooling of model output.
+        """
         token_embeddings = model_output[0] #First element of model_output contains all token embeddings
         input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
         return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
