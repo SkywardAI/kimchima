@@ -7,11 +7,6 @@ upload:
 	twine upload dist/* --verbose
 
 
-.PHONY: test
-test:
-	@python -m unittest -v
-
-
 ################################Poetry################################
 .PHONY: poetry
 poetry:
@@ -28,6 +23,11 @@ install:
 	@poetry install -vvv
 
 
+.PHONY: test
+test:
+	@poetry run python -m unittest discover -v
+
+
 # build and publish
 .PHONY: publish
 publish:
@@ -42,4 +42,26 @@ config:
 
 .PHONY: source
 source:
-	@poetry config repositories.source https://pypi.org/simple
+	@poetry config repositories.source https://pypi.org/project/kimchima
+
+
+###################################################################################################
+# Commit and recommit changes to github
+.PONY: commit
+commit:
+	@echo "Committing changes..."
+	@git add .
+	@git commit -s -m"${message}"
+	@git push origin ${branch}
+	@git log -1
+	@echo "Changes committed and pushed to github."
+
+
+.PONY: recommit
+recommit:
+	@echo "Committing changes..."
+	@git add .
+	@git commit -s --amend --no-edit
+	@git push -f origin ${branch}
+	@git log -1
+	@echo "Changes committed and pushed to github."
