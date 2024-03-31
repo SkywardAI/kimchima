@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "kimchima"
+version = "0.2.0"
+description = ""
+authors = ["Aisuko <urakiny@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/Aisuko/kimchi"
+repository = "https://github.com/Aisuko/kimchi"
+keywords = ["ai", "llm"]
+
+packages = [
+    { include = "pkg" },
+]
+
+exclude = ["pkg/dump", "pkg/model", "pkg/tokenizer"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = "2.2.2"
+transformers = "4.39.2"
+sentencepiece = "0.2.0"
+
+[tool.poetry.group.dev.dependencies]
+torch = "2.2.2"
+transformers = "4.39.2"
+sentencepiece = "0.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

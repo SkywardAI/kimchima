@@ -1,11 +1,3 @@
-.PHONY: init
-init:
-	conda create --name kimchi python=3.11 -y
-
-.PHONY: kimchi
-kimchi:
-	conda env create -f kimchi.yml
-
 .PHONY: setup
 setup:
 	python setup.py sdist bdist_wheel
@@ -14,19 +6,62 @@ setup:
 upload:
 	twine upload dist/* --verbose
 
-.PHONY: exportenv
-exportenv:
-	conda env export > kimchi.yml
 
-.PHONY: exit
-exit:
-	conda deactivate
+################################Poetry################################
+.PHONY: poetry
+poetry:
+	@pipx install poetry==1.8.2
 
-.PHONY: remove
-remove:
-	conda env remove --name kimchi -y
+
+.PHONY: build
+build:
+	@poetry build
+
+
+.PHONY: install
+install:
+	@poetry install -vvv
 
 
 .PHONY: test
 test:
-	@python -m unittest -v
+	@poetry run python -m unittest discover -v
+
+
+# build and publish
+.PHONY: publish
+publish:
+	@poetry publish --build
+
+
+# list current configuration
+.PHONY: config
+config:
+	@poetry config --list
+
+
+.PHONY: source
+source:
+	@poetry config repositories.source https://pypi.org/project/kimchima
+
+
+###################################################################################################
+# Commit and recommit changes to github
+.PONY: commit
+commit:
+	@echo "Committing changes..."
+	@git add .
+	@git commit -s -m"${message}"
+	@git push origin ${branch}
+	@git log -1
+	@echo "Changes committed and pushed to github."
+
+
+.PONY: recommit
+recommit:
+	@echo "Committing changes..."
+	@git add .
+	@git commit -s --amend --no-edit
+	@git push -f origin ${branch}
+	@git log -1
+	@echo "Changes committed and pushed to github."

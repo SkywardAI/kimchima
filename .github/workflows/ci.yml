@@ -14,11 +14,9 @@ jobs:
     name: 'Test 🔬'
     strategy:
       matrix:
-        os: 
-          - ubuntu-latest
-        python-version:
-          - "3.11"
-
+        os: ["ubuntu-latest"]
+        python-version: ["3.11"]
+        poetry-version: ["1.8.2"]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check repository
@@ -27,14 +25,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          # cache: 'pip'
+          cache: 'pip'
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
       - name: Install dependencies
         run:  |
-          conda env create -f kimchi.yml
-          conda activate kimchi
+          make install
       - name: Run tests
         run: |
            make test
-

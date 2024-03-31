@@ -1,23 +1,16 @@
 # coding=utf-8
-# Copyright (c) 2023 Aisuko
+# Copyright [2024] [Aisuko]
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+#        http://www.apache.org/licenses/LICENSE-2.0
 
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import torch
 import torch.nn.functional as F
@@ -34,6 +27,9 @@ class Auto:
         
         Args:
             model_name_or_path (str): The model name or path of model.
+        
+        Returns:
+            None
         """
         model_name_or_path = kwargs.pop('model_name_or_path', None)
         if model_name_or_path is None:
@@ -51,6 +47,9 @@ class Auto:
             text (str): The text to get embeddings.
             device (str): The device to use. Default is 'cpu'.
             max_length (int): The maximum length of text. Default is 512.
+
+        Returns:
+            torch.tensor: The embeddings of text.
         """
         try:
             text = kwargs.pop('text', None)
@@ -74,6 +73,16 @@ class Auto:
     @staticmethod
     #Mean Pooling - Take attention mask into account for correct averaging
     def mean_pooling(model_output, attention_mask):
+        """
+        Mean pooling of model output.
+
+        Args:
+            model_output (torch.tensor): The model output.
+            attention_mask (torch.tensor): The attention mask.
+
+        Returns:
+            torch.tensor: The mean pooling of model output.
+        """
         token_embeddings = model_output[0] #First element of model_output contains all token embeddings
         input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
         return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)

@@ -1,8 +1,9 @@
 import unittest
 import torch
-from model import Transformer, ModelArgs
+from pkg.model import Transformer, ModelArgs
 
-from dump import Dump
+from pkg.dump import Dump
+
 
 class TestDump(unittest.TestCase):
 
