@@ -8,9 +8,7 @@ The collections of tools for ML model development.
 
 # Usage
 
-You can use it as a command line tool if you like. And you can also use it as a library. Or you can run it in VSCode with [`launch.json`](.vscode/launch.json).
-
-
+See examples in the [examples](./examples) directory.
 
 # Acknowledgement
 
