@@ -1,0 +1,1 @@
+from .auto_cli import CommandAuto

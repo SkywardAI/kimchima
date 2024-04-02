@@ -1,3 +1,7 @@
+#################################################################
+TESTDIR:=src/kimchima/tests/
+
+##############################Legacy#############################
 .PHONY: setup
 setup:
 	python setup.py sdist bdist_wheel
@@ -10,6 +14,7 @@ upload:
 ################################Poetry################################
 .PHONY: poetry
 poetry:
+	@poetry config virtualenvs.in-project true
 	@pipx install poetry==1.8.2
 
 
@@ -25,7 +30,7 @@ install:
 
 .PHONY: test
 test:
-	@poetry run python -m unittest discover -v
+	@poetry run python -m unittest discover ${TESTDIR} -v
 
 
 # build and publish

@@ -12,23 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from enum import Enum
-import torch
-import platform
+__version__="0.2.2"
 
-class Devices(Enum):
-    Silicon = 'mps'
-    CPU = 'cpu'
-    # only Nvidia GPU is supported currently
-    GPU = 'cuda'
-
-
-def get_device():
-    """
-    Only support Single GPU for now
-    """
-    if platform.system() == 'Darwin':
-        return Devices.Silicon
-    elif torch.cuda.is_available():
-        return Devices.GPU
-    return Devices.CPU
+from .pkg import (
+    Auto,
+    Devices,
+    get_device,
+    get_capability
+)

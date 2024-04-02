@@ -16,7 +16,7 @@ import unittest
 import platform
 import torch
 
-from pkg.devices import Devices, get_device
+from kimchima.pkg import Devices, get_device, get_capability
 
 class TestDevices(unittest.TestCase):
 
@@ -34,3 +34,16 @@ class TestDevices(unittest.TestCase):
         if platform.system() != 'Darwin' and not torch.cuda.is_available():
             self.assertEqual(get_device(), Devices.CPU)
 
+
+    def test_get_capability(self):
+
+        # Test if the device is a GPU
+        if get_device() == Devices.GPU:
+            self.assertIsInstance(get_capability(), tuple)
+            self.assertEqual(len(get_capability()), 2)
+            self.assertIsInstance(get_capability()[0], int)
+            self.assertIsInstance(get_capability()[1], int)
+        
+        # Test if the device is not a GPU
+        if get_device() != Devices.GPU:
+            self.assertEqual(get_capability(), (0, 0))
