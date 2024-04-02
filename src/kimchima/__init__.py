@@ -17,5 +17,6 @@ __version__="0.2.2"
 from .pkg import (
     Auto,
     Devices,
-    get_device
+    get_device,
+    get_capability
 )
