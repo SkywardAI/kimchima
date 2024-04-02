@@ -1,2 +1,5 @@
 from .auto import Auto
-from .devices import Devices, get_device
+from .devices import (
+    Devices,
+    get_device
+)

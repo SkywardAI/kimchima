@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import annotations
+
 from enum import Enum
 import torch
 import platform
+
+from typing import Tuple
+
 
 class Devices(Enum):
     Silicon = 'mps'
@@ -23,7 +28,7 @@ class Devices(Enum):
     GPU = 'cuda'
 
 
-def get_device():
+def get_device()-> Devices:
     """
     Only support Single GPU for now
     """
@@ -32,3 +37,17 @@ def get_device():
     elif torch.cuda.is_available():
         return Devices.GPU
     return Devices.CPU
+
+
+def get_capability()-> Tuple[int, int]:
+    """
+    Get the capability of the device(GPU) for current env, this is used for support latest quantization techniques like: Marlin
+    
+    Returns:
+        tuple: The capability of the device(GPU) for current env.
+
+    For not GPU env, return (0, 0)
+    """
+    if get_device() == Devices.GPU:
+        return torch.cuda.get_device_capability()
+    return (0, 0)

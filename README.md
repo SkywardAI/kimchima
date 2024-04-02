@@ -10,13 +10,6 @@ The collections of tools for ML model development.
 
 You can use it as a command line tool if you like. And you can also use it as a library. Or you can run it in VSCode with [`launch.json`](.vscode/launch.json).
 
-## Command Line Tool
-
-```bash
-$ python -m kimchima auto sentence-transformers/all-MiniLM-L6-v2 Melbourne 
-
-```
-
 
 
 # Acknowledgement
