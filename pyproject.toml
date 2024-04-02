@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kimchima"
-version = "0.2.1"
+version = "0.2.2"
 description = ""
 authors = ["Aisuko <urakiny@gmail.com>"]
 license = "Apache-2.0"
@@ -9,11 +9,7 @@ homepage = "https://github.com/Aisuko/kimchi"
 repository = "https://github.com/Aisuko/kimchi"
 keywords = ["ai", "llm"]
 
-packages = [
-    { include = "pkg" },
-]
 
-exclude = ["pkg/dump", "pkg/model", "pkg/tokenizer"]
 
 [tool.poetry.dependencies]
 python = "^3.11"

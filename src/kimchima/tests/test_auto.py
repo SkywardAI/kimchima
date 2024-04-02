@@ -14,7 +14,7 @@
 
 import unittest
 
-from pkg.auto import Auto
+from kimchima.pkg import Auto
 
 
 class TestAuto(unittest.TestCase):

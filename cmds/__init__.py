@@ -1,1 +1,0 @@
-from cmds.auto import CommandAuto

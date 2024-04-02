@@ -14,7 +14,7 @@
 
 import argparse
 
-from cmds.auto import CommandAuto
+from kimchima.cmds.auto_cli import CommandAuto
 
 
 def main():

@@ -16,7 +16,7 @@ import unittest
 import platform
 import torch
 
-from pkg.devices import Devices, get_device
+from kimchima.pkg import Devices, get_device
 
 class TestDevices(unittest.TestCase):
 
@@ -33,4 +33,3 @@ class TestDevices(unittest.TestCase):
         # Test if the device is a CPU
         if platform.system() != 'Darwin' and not torch.cuda.is_available():
             self.assertEqual(get_device(), Devices.CPU)
-
