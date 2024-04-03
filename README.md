@@ -10,6 +10,11 @@ The collections of tools for ML model development.
 
 See examples in the [examples](./examples) directory.
 
+
+# Development
+
+Please kindly check the .devcontainer directory for the development environment setup.
+
 # Acknowledgement
 
 - [Llama2-burn Project](https://github.com/Gadersd/llama2-burn/tree/main)
