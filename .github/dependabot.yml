@@ -7,6 +7,6 @@
 version: 2
 updates:
  - package-ecosystem: "pip"
-   directory: "/pkg"
+   directory: "/"
    schedule:
      interval: weekly
