@@ -33,7 +33,7 @@ class Auto:
         """
         model_name_or_path = kwargs.pop('model_name_or_path', None)
         if model_name_or_path is None:
-            return None
+            return ValueError(f"model_name_or_path is required.")
         self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
         # https://github.com/huggingface/transformers/blob/v4.39.2/src/transformers/models/auto/auto_factory.py#L444
         # TODO @aisuko: add more parameters
@@ -51,23 +51,21 @@ class Auto:
         Returns:
             torch.tensor: The embeddings of text.
         """
-        try:
-            text = kwargs.pop('text', None)
-            device = kwargs.pop('device', 'cpu')
-            max_length = kwargs.pop('max_length', 512)
 
-            inputs_ids = self.tokenizer(text, return_tensors='pt',max_length=max_length, padding=True, truncation=True).to(device)
+        text = kwargs.pop('text', None)
+        device = kwargs.pop('device', 'cpu')
+        max_length = kwargs.pop('max_length', 512)
 
-            with torch.no_grad():
-                output = self.model(**inputs_ids)
+        inputs_ids = self.tokenizer(text, return_tensors='pt',max_length=max_length, padding=True, truncation=True).to(device)
+
+        with torch.no_grad():
+            output = self.model(**inputs_ids)
             
-            embeddings=Auto.mean_pooling(output, inputs_ids['attention_mask'])
+        embeddings=Auto.mean_pooling(output, inputs_ids['attention_mask'])
 
-            # Normalize embeddings
-            sentence_embeddings = F.normalize(embeddings, p=2, dim=1)
+        # Normalize embeddings
+        sentence_embeddings = F.normalize(embeddings, p=2, dim=1)
 
-        except Exception as e:
-            sentence_embeddings=None
         return sentence_embeddings
 
     @staticmethod
