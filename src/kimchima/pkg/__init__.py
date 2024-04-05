@@ -4,3 +4,8 @@ from .devices import (
     get_device,
     get_capability
 )
+
+from .logging import (
+    get_logger,
+    get_verbosity
+)
