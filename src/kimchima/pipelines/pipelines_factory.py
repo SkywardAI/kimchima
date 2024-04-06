@@ -12,5 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import annotations
 
-from .pipelines_factory import PipelinesFactory
+from kimchima.pkg import logging
+
+from transformers import pipeline
+
+logger=logging.get_logger(__name__)
+
+class PipelinesFactory:
+    r"""
+
+    """
+
+    @classmethod
+    def __init__(cls):
+        raise EnvironmentError(
+            "Pipelines is designed to be instantiated "
+            "using the `Pipelines.from_pretrained(pretrained_model_name_or_path)` method."
+        )
+
+
+    @classmethod
+    def text_generation(cls, *args,**kwargs)-> str:
+        r"""
+        """
+        pass
