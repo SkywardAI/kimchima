@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# The original code in Huggingface Transformers library is licensed under the Apache 2.0 license.
+# Adaptor: Aisuko
+# TODO: Will tweak the code to fit the Kimchima library
+
+from __future__ import annotations
+
 import logging
 import os
 import sys

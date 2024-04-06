@@ -19,12 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from kimchima.pkg import Auto
+from kimchima.pkg import ModelFactory
 
 
-class CommandAuto:
+class CommandAutoModel:
     """
-    A class for auto command.
+    A class for loading models.
     """
 
     @staticmethod
@@ -38,7 +38,6 @@ class CommandAuto:
         Returns:
             torch.tensor: The embeddings of text.
         """
-        model = Auto(model_name_or_path=args.model_name_or_path)
-        embeddings = model.get_embeddings(text=args.text)
-        print(embeddings)
+        model = ModelFactory.auto_model(pretrained_model_name_or_path=args.model_name)
+        print(model.config)
 
