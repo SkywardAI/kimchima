@@ -1,1 +1,1 @@
-from .auto_cli import CommandAuto
+from .auto_cli import CommandAutoModel
