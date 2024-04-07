@@ -14,7 +14,7 @@
 
 from __future__ import annotations
 
-from transformers import AutoModel
+from transformers import AutoModel, AutoModelForCausalLM
 from kimchima.pkg import logging
 
 logger = logging.get_logger(__name__)
@@ -45,6 +45,21 @@ class ModelFactory:
         if pretrained_model_name_or_path is None:
             raise ValueError("pretrained_model_name_or_path cannot be None")
         model = AutoModel.from_pretrained(pretrained_model_name_or_path, **kwargs)
+        logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
+        return model
+    
+    @classmethod
+    def auto_model_for_causal_lm(cls, pretrained_model_name_or_path, **kwargs)-> AutoModelForCausalLM:
+        r"""
+        It is used to get the model from the Hugging Face Transformers AutoModelForCausalLM.
+        
+        Args:
+            pretrained_model_name_or_path: pretrained model name or path
+
+        """
+        if pretrained_model_name_or_path is None:
+            raise ValueError("pretrained_model_name_or_path cannot be None")
+        model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, **kwargs)
         logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
         return model
 

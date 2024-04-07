@@ -15,15 +15,17 @@
 
 from .model_factory import ModelFactory
 from .tokenizer_factory import TokenizerFactory
-from .embeddings import EmbeddingsFactory
+from .embedding_factory import EmbeddingsFactory
+from .quantization_factory import QuantizationFactory
+from .streamer_factory import StreamerFactory
 
-from .devices import (
-    Devices,
-    get_device,
-    get_capability
-)
+from .devices import Devices
 
-from .logging import (
-    get_logger,
-    get_verbosity
-)
+__all__ = [
+    'ModelFactory', 
+    'TokenizerFactory', 
+    'EmbeddingsFactory',
+    'QuantizationFactory',
+    'StreamerFactory',
+    'Devices'
+    ]

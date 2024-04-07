@@ -28,26 +28,27 @@ class Devices(Enum):
     GPU = 'cuda'
 
 
-def get_device()-> Devices:
-    """
-    Only support Single GPU for now
-    """
-    if platform.system() == 'Darwin':
-        return Devices.Silicon
-    elif torch.cuda.is_available():
-        return Devices.GPU
-    return Devices.CPU
+    @classmethod
+    def get_device(cls)-> Devices:
+        """
+        Only support Single GPU for now
+        """
+        if platform.system() == 'Darwin':
+            return Devices.Silicon
+        elif torch.cuda.is_available():
+            return Devices.GPU
+        return Devices.CPU
 
+    @classmethod
+    def get_capability(cls)-> Tuple[int, int]:
+        """
+        Get the capability of the device(GPU) for current env, this is used for support latest quantization techniques like: Marlin
+        
+        Returns:
+            tuple: The capability of the device(GPU) for current env.
 
-def get_capability()-> Tuple[int, int]:
-    """
-    Get the capability of the device(GPU) for current env, this is used for support latest quantization techniques like: Marlin
-    
-    Returns:
-        tuple: The capability of the device(GPU) for current env.
-
-    For not GPU env, return (0, 0)
-    """
-    if get_device() == Devices.GPU:
-        return torch.cuda.get_device_capability()
-    return (0, 0)
+        For not GPU env, return (0, 0)
+        """
+        if cls.get_device() == Devices.GPU:
+            return torch.cuda.get_device_capability()
+        return (0, 0)

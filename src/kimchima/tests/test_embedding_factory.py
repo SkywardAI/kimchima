@@ -45,7 +45,7 @@ class TestAutoFactory(unittest.TestCase):
 
         self.assertIsNotNone(self.model)
 
-        embeddings = EmbeddingsFactory.auto_embeddings(
+        embeddings = EmbeddingsFactory.get_text_embeddings(
             model=self.model,
             tokenizer=self.tokenizer, 
             prompt='Melbourne',
@@ -63,7 +63,7 @@ class TestAutoFactory(unittest.TestCase):
 
         self.assertIsNotNone(self.model)
 
-        embeddings = EmbeddingsFactory.auto_embeddings(
+        embeddings = EmbeddingsFactory.get_text_embeddings(
             model=self.model,
             tokenizer=self.tokenizer, 
             prompt=['Melbourne', 'Sydney'],
