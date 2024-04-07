@@ -16,7 +16,10 @@ from __future__ import annotations
 
 from kimchima.pkg import logging
 
-from transformers import TextStreamer
+from transformers import (
+    TextStreamer,
+    TextIteratorStreamer
+    )
 
 logger = logging.get_logger(__name__)
 
@@ -53,5 +56,30 @@ class StreamerFactory:
             skip_prompt_tokens=skip_prompt_tokens
             )
         logger.info("TextStreamer created")
+
+        return streamer
+    
+    @classmethod
+    def text_iterator_streamer(cls, *args, **kwargs)-> TextIteratorStreamer:
+        r"""
+        Get streamer for text generation task.
+
+        Args:
+            skip_prompt: skip prompt
+            skip_prompt_tokens: skip prompt tokens
+        """
+        #TODO support more parameters
+        tokenizer=kwargs.pop('tokenizer', None)
+        if tokenizer is None:
+            raise ValueError("tokenizer is required")
+        skip_prompt=kwargs.pop('skip_prompt', False)
+        skip_prompt_tokens=kwargs.pop('skip_prompt_tokens', False)
+
+        streamer=TextIteratorStreamer(
+            tokenizer=tokenizer,
+            skip_prompt=skip_prompt,
+            skip_prompt_tokens=skip_prompt_tokens
+            )
+        logger.info("TextIteratorStreamer created")
 
         return streamer
