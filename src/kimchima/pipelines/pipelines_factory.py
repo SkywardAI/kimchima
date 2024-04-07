@@ -44,9 +44,6 @@ class PipelinesFactory:
             raise ValueError("tokenizer is required")
         streamer=kwargs.pop("text_streamer", None)
         max_new_tokens=kwargs.pop("max_new_tokens", 20)
-        quantization_config=kwargs.pop("quantization_config", None)
-        if quantization_config is None:
-            raise ValueError("quantization_config is required")
 
         pipe=pipeline(
             task="text-generation",
@@ -54,7 +51,6 @@ class PipelinesFactory:
             tokenizer=tokenizer,
             streamer=streamer,
             max_new_tokens=max_new_tokens,
-            quantization_config=quantization_config,
             device_map='auto',
             **kwargs
         )
