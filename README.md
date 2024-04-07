@@ -2,6 +2,7 @@
 
 [![Backend CI/CD 🚀](https://github.com/Aisuko/kimchima/actions/workflows/ci.yml/badge.svg)](https://github.com/Aisuko/kimchima/actions/workflows/ci.yml)
 [![Release Drafter 🚀](https://github.com/Aisuko/kimchima/actions/workflows/release-drafter.yml/badge.svg)](https://github.com/Aisuko/kimchima/actions/workflows/release-drafter.yml)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 The collections of tools for ML model development.
 

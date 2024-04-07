@@ -18,9 +18,6 @@ import torch
 import torch.nn.functional as F
 from kimchima.pkg import logging
 
-from .model_factory import ModelFactory
-from .tokenizer_factory import TokenizerFactory
-
 
 logger = logging.get_logger(__name__)
 
@@ -40,8 +37,7 @@ class EmbeddingsFactory:
 
     """
 
-    @classmethod
-    def __init__(cls):
+    def __init__(self):
         raise EnvironmentError(
             "Embeddings is designed to be instantiated "
             "using the `Embeddings.from_pretrained(pretrained_model_name_or_path)` method."
@@ -49,7 +45,7 @@ class EmbeddingsFactory:
 
 
     @classmethod
-    def auto_embeddings(cls, *args,**kwargs)-> torch.Tensor:
+    def get_text_embeddings(cls, *args, **kwargs)-> torch.Tensor:
         r"""
         Get embeddings from the model.
 

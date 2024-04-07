@@ -26,6 +26,9 @@ build:
 install:
 	@poetry install -vvv
 
+.PHONY: lint
+lint:
+	@ruff check --output-format=github .
 
 .PHONY: test
 test:

@@ -12,7 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import unittest
 
-from .pipelines_factory import PipelinesFactory
+from kimchima.pkg import QuantizationFactory
 
-__all__ = [ "PipelinesFactory"]
+class TestQuantizationFactory(unittest.TestCase):
+
+    def test_quantization_4bit(self):
+        """
+        Test quantization_4bit method. This function is also test the quantization dependencies
+        were installed correctly.
+        """
+
+        quantization_config = QuantizationFactory.quantization_4bit()
+
+        self.assertIsNotNone(quantization_config)
+        self.assertEqual(quantization_config.load_in_4bit, True)

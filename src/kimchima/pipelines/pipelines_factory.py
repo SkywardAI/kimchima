@@ -20,21 +20,46 @@ from transformers import pipeline
 
 logger=logging.get_logger(__name__)
 
+
 class PipelinesFactory:
     r"""
 
     """
 
-    @classmethod
-    def __init__(cls):
+    def __init__(self):
         raise EnvironmentError(
             "Pipelines is designed to be instantiated "
             "using the `Pipelines.from_pretrained(pretrained_model_name_or_path)` method."
         )
 
-
     @classmethod
-    def text_generation(cls, *args,**kwargs)-> str:
+    def text_generation(cls, *args,**kwargs)-> pipeline:
         r"""
         """
-        pass
+        model=kwargs.pop("model", None)
+        if model is None:
+            raise ValueError("model is required")
+        tokenizer=kwargs.pop("tokenizer", None)
+        if tokenizer is None:
+            raise ValueError("tokenizer is required")
+        streamer=kwargs.pop("text_streamer", None)
+        if streamer is None:
+            raise ValueError("text_streamer is required")
+        max_new_tokens=kwargs.pop("max_new_tokens", 20)
+        quantization_config=kwargs.pop("quantization_config", None)
+        if quantization_config is None:
+            raise ValueError("quantization_config is required")
+
+        pipe=pipeline(
+            task="text-generation",
+            model=model,
+            tokenizer=tokenizer,
+            streamer=streamer,
+            max_new_tokens=max_new_tokens,
+            quantization_config=quantization_config,
+            device_map='auto'
+        )
+
+        logger.debug(f"The text generation pipeline device is {pipe.device}")
+
+        return pipe

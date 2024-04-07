@@ -13,16 +13,3 @@
 # limitations under the License.
 
 __version__="0.2.3"
-
-from .pkg import (
-    ModelFactory,
-    TokenizerFactory,
-    EmbeddingsFactory,
-    Devices
-)
-
-
-from .pkg import (
-    get_device,
-    get_capability
-)
