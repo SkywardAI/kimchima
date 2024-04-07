@@ -1,7 +1,10 @@
 from kimchima import (
     ModelFactory, 
     TokenizerFactory,
+    StreamerFactory,
     EmbeddingsFactory,
+    QuantizationFactory,
+    PipelinesFactory,
     Devices
 )
 
@@ -37,3 +40,18 @@ print(device)
 # get capability of GPU(Nvidia)
 capability = Devices.get_capability()
 print(capability)
+
+
+# streamer
+model= ModelFactory.auto_model_for_causal_lm(pretrained_model_name_or_path="gpt2")
+tokenizer= TokenizerFactory.auto_tokenizer(pretrained_model_name_or_path="gpt2")
+streamer= StreamerFactory.text_streamer(tokenizer=tokenizer, skip_prompt=False, skip_prompt_tokens=False)
+
+
+pipe=PipelinesFactory.text_generation(
+    model=model, 
+    tokenizer=tokenizer, 
+    text_streamer=streamer
+    )
+
+pipe("Melbourne is the capital of Victoria")

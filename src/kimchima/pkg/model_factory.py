@@ -34,7 +34,7 @@ class ModelFactory:
         )
 
     @classmethod                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-    def auto_model(cls, pretrained_model_name_or_path, **kwargs)-> AutoModel:
+    def auto_model(cls, *args, **kwargs)-> AutoModel:
         r"""
         It is used to get the model from the Hugging Face Transformers AutoModel.
         
@@ -42,14 +42,21 @@ class ModelFactory:
             pretrained_model_name_or_path: pretrained model name or path
 
         """
+        pretrained_model_name_or_path=kwargs.pop("pretrained_model_name_or_path", None)
         if pretrained_model_name_or_path is None:
             raise ValueError("pretrained_model_name_or_path cannot be None")
-        model = AutoModel.from_pretrained(pretrained_model_name_or_path, **kwargs)
+
+        quantization_config=kwargs.pop("quantization_config", None)
+        model = AutoModel.from_pretrained(
+            pretrained_model_name_or_path,
+            quantization_config,
+            **kwargs
+        )
         logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
         return model
     
     @classmethod
-    def auto_model_for_causal_lm(cls, pretrained_model_name_or_path, **kwargs)-> AutoModelForCausalLM:
+    def auto_model_for_causal_lm(cls, *args, **kwargs)-> AutoModelForCausalLM:
         r"""
         It is used to get the model from the Hugging Face Transformers AutoModelForCausalLM.
         
@@ -57,9 +64,17 @@ class ModelFactory:
             pretrained_model_name_or_path: pretrained model name or path
 
         """
+        pretrained_model_name_or_path=kwargs.pop("pretrained_model_name_or_path", None)
         if pretrained_model_name_or_path is None:
             raise ValueError("pretrained_model_name_or_path cannot be None")
-        model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path, **kwargs)
+
+        quantization_config=kwargs.pop("quantization_config", None)
+        model = AutoModelForCausalLM.from_pretrained(
+            pretrained_model_name_or_path, 
+            quantization_config=quantization_config,
+            device_map='auto',
+            **kwargs
+        )
         logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
         return model
 
