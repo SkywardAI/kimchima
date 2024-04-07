@@ -3,7 +3,6 @@ from kimchima import (
     TokenizerFactory,
     StreamerFactory,
     EmbeddingsFactory,
-    QuantizationFactory,
     PipelinesFactory,
     Devices
 )
