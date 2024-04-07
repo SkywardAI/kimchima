@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "kimchima"
-version = "0.2.2"
+version = "0.3.0"
 description = "The collections of tools for ML model development."
 authors = ["Aisuko <urakiny@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 homepage = "https://github.com/Aisuko/kimchi"
 repository = "https://github.com/Aisuko/kimchi"
-keywords = ["ai", "llm"]
+keywords = ["transformers", "pytorch"]
 
 
 

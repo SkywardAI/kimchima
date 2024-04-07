@@ -12,4 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__version__="0.2.3"
+__version__="0.3.0"
+
+from kimchima.pkg import (
+    ModelFactory,
+    TokenizerFactory,
+    EmbeddingsFactory,
+    QuantizationFactory,
+    StreamerFactory,
+    Devices
+    )
+
+from kimchima.pipelines import PipelinesFactory
+
+__all__ = [
+    'ModelFactory', 
+    'TokenizerFactory', 
+    'EmbeddingsFactory',
+    'QuantizationFactory',
+    'StreamerFactory',
+    'Devices',
+    'PipelinesFactory'
+    ]

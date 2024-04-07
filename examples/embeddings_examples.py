@@ -1,13 +1,10 @@
 from kimchima import (
     ModelFactory, 
     TokenizerFactory,
-    EmbeddingsFactory
+    EmbeddingsFactory,
+    Devices
 )
 
-
-from kimchima import(
-    get_device, 
-    get_capability)
 
 pretrained_model_name_or_path = "sentence-transformers/all-MiniLM-L6-v2"
 
@@ -15,7 +12,7 @@ model = ModelFactory.auto_model(pretrained_model_name_or_path=pretrained_model_n
 tokenizer= TokenizerFactory.auto_tokenizer(pretrained_model_name_or_path=pretrained_model_name_or_path)
 
 # computing embeddings for single text
-embeddings = EmbeddingsFactory.auto_embeddings(
+embeddings = EmbeddingsFactory.get_text_embeddings(
     model=model,
     tokenizer=tokenizer,
     prompt='Melbourne',
@@ -24,7 +21,7 @@ embeddings = EmbeddingsFactory.auto_embeddings(
 print(embeddings.shape)
 
 # computing embeddings for multiple texts
-embeddings = EmbeddingsFactory.auto_embeddings(
+embeddings = EmbeddingsFactory.get_text_embeddings(
     model=model,
     tokenizer=tokenizer,
     prompt=['Melbourne', 'Sydney'],
@@ -33,10 +30,10 @@ embeddings = EmbeddingsFactory.auto_embeddings(
 print(embeddings.shape)
 
 # Checking the device: GPU, mps and CPU
-device = get_device()
+device = Devices.get_device()
 print(device)
 
 
 # get capability of GPU(Nvidia)
-capability = get_capability()
+capability = Devices.get_capability()
 print(capability)
