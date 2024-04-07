@@ -38,7 +38,8 @@ class QuantizationFactory:
         #TODO support more parameters
         config=BitsAndBytesConfig(
             load_in_4bit=True,
-            bnb_4bit_compute_dtype=torch.bfloat16
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            **kwargs
             )
 
         return config
@@ -49,7 +50,8 @@ class QuantizationFactory:
         """
         config=BitsAndBytesConfig(
             load_in_8bit=True,
-            bnb_8bit_compute_dtype=torch.bfloat16
+            bnb_8bit_compute_dtype=torch.bfloat16,
+            **kwargs
             )
 
         return config

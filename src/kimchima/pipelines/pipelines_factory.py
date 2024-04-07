@@ -55,7 +55,8 @@ class PipelinesFactory:
             streamer=streamer,
             max_new_tokens=max_new_tokens,
             quantization_config=quantization_config,
-            device_map='auto'
+            device_map='auto',
+            **kwargs
         )
 
         logger.debug(f"The text generation pipeline device is {pipe.device}")
