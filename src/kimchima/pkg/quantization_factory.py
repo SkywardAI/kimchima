@@ -23,6 +23,7 @@ logger = logging.get_logger(__name__)
 
 class QuantizationFactory:
     r"""
+    A factory class for creating Huggingface Transformers quantization configurations for different quantization techniques.
     """
 
     def __init__(self):
@@ -34,6 +35,7 @@ class QuantizationFactory:
     @classmethod
     def quantization_4bit(cls, *args, **kwargs)-> BitsAndBytesConfig:
         r"""
+        4 bit quantization
         """
         #TODO support more parameters
         config=BitsAndBytesConfig(
@@ -47,6 +49,7 @@ class QuantizationFactory:
     @classmethod
     def quantization_8bit(cls, *args, **kwargs)-> BitsAndBytesConfig:
         r"""
+        8 bit quantization
         """
         config=BitsAndBytesConfig(
             load_in_8bit=True,

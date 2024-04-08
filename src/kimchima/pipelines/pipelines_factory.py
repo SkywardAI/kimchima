@@ -23,7 +23,7 @@ logger=logging.get_logger(__name__)
 
 class PipelinesFactory:
     r"""
-
+    A factory class for creating Huggingface Transformers pipelines for different ML tasks.
     """
 
     def __init__(self):
@@ -35,7 +35,9 @@ class PipelinesFactory:
     @classmethod
     def text_generation(cls, *args,**kwargs)-> pipeline:
         r"""
+        Create a text generation pipeline using the Huggingface Transformers library.
         """
+        
         model=kwargs.pop("model", None)
         if model is None:
             raise ValueError("model is required")
@@ -44,7 +46,8 @@ class PipelinesFactory:
             raise ValueError("tokenizer is required")
         streamer=kwargs.pop("text_streamer", None)
         max_new_tokens=kwargs.pop("max_new_tokens", 20)
-
+        
+        #
         pipe=pipeline(
             task="text-generation",
             model=model,

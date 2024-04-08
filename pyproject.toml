@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kimchima"
-version = "0.3.0"
+version = "0.3.1"
 description = "The collections of tools for ML model development."
 authors = ["Aisuko <urakiny@gmail.com>"]
 license = "Apache-2.0"
@@ -23,6 +23,8 @@ accelerate = "0.28.0"
 torch = "2.2.2"
 transformers = "4.39.2"
 sentencepiece = "0.2.0"
+bitsandbytes = "0.43.0"
+accelerate = "0.28.0"
 
 
 [tool.ruff]
