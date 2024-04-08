@@ -20,7 +20,8 @@ from kimchima.pkg import (
     EmbeddingsFactory,
     QuantizationFactory,
     StreamerFactory,
-    Devices
+    Devices,
+    DownloadHub
     )
 
 from kimchima.pipelines import PipelinesFactory
@@ -32,5 +33,6 @@ __all__ = [
     'QuantizationFactory',
     'StreamerFactory',
     'Devices',
-    'PipelinesFactory'
+    'PipelinesFactory',
+    'DownloadHub'
     ]
