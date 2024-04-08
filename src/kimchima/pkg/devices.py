@@ -30,7 +30,7 @@ class Devices(Enum):
 
     @classmethod
     def get_device(cls)-> Devices:
-        """
+        r"""
         Only support Single GPU for now
         """
         if platform.system() == 'Darwin':
@@ -41,7 +41,7 @@ class Devices(Enum):
 
     @classmethod
     def get_capability(cls)-> Tuple[int, int]:
-        """
+        r"""
         Get the capability of the device(GPU) for current env, this is used for support latest quantization techniques like: Marlin
         
         Returns:
