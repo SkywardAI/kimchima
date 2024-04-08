@@ -38,6 +38,6 @@ class CommandAutoModel:
         Returns:
             torch.tensor: The embeddings of text.
         """
-        model = ModelFactory.auto_model(pretrained_model_name_or_path=args.model_name)
+        model = ModelFactory.auto_model(pretrained_model_name_or_path=args.model_name_or_path)
         print(model.config)
 
