@@ -32,7 +32,7 @@ class ChatTemplateFactory:
         )
 
     @classmethod
-    def text_generation(cls, *args,**kwargs)-> list[int]:
+    def prompt_generation(cls, *args,**kwargs)-> list[int]:
         r"""
         Create prompt by using the Huggingface Transformers library.
         """
