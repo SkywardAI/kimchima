@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright [2024] [Aisuko]
+# Copyright [2024] [SkywardAI]
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -12,28 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__version__="0.3.1"
 
-from kimchima.pkg import (
-    ModelFactory,
-    TokenizerFactory,
-    EmbeddingsFactory,
-    QuantizationFactory,
-    StreamerFactory,
-    Devices,
-    DownloadHub
-    )
+from .chat_template_factory import ChatTemplateFactory
 
-from kimchima.pipelines import PipelinesFactory
-from kimchima.chat_template import ChatTemplateFactory
-__all__ = [
-    'ModelFactory', 
-    'TokenizerFactory', 
-    'EmbeddingsFactory',
-    'QuantizationFactory',
-    'StreamerFactory',
-    'Devices',
-    'PipelinesFactory',
-    'ChatTemplateFactory',
-    'DownloadHub'
-    ]
+__all__ = [ "ChatTemplateFactory"]
