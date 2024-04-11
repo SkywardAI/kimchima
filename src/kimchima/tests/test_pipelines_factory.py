@@ -62,7 +62,7 @@ class TestPipelinesFactory(unittest.TestCase):
             self.assertEqual(pipe.task, 'text-generation')
 
         @classmethod
-        def test_customized_pipe(cls):
+        def test_customized_pipe(self):
             """
             Test customized_pipe method
             """
@@ -79,7 +79,7 @@ class TestPipelinesFactory(unittest.TestCase):
             self.assertIsNotNone(pipe)
 
         @classmethod
-        def test_chat_response(cls):
+        def test_chat_response(self):
             """
             Test chat_response method
             """
