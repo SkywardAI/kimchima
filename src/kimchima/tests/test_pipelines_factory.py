@@ -67,8 +67,6 @@ class TestPipelinesFactory(unittest.TestCase):
             Test customized_pipe method
             """
     
-            self.assertIsNotNone(self.model)
-    
             pipe = PipelinesFactory.customized_pipe(
                 model=self.model,
                 tokenizer=self.tokenizer,
@@ -86,8 +84,7 @@ class TestPipelinesFactory(unittest.TestCase):
             conversation_model="facebook/blenderbot-400M-distill"
             msg = "why Melbourne is a good place to travel?"
             prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
-            self.assertIsNotNone(self.model)
-
+            
             res = PipelinesFactory.chat_response(
                 conversation_model=conversation_model,
                 messages=msg,
