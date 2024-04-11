@@ -68,13 +68,16 @@ class TestPipelinesFactory(unittest.TestCase):
             """
     
             pipe = PipelinesFactory.customized_pipe(
+                task="text-generation",
                 model=self.model,
                 tokenizer=self.tokenizer,
-                text_streamer=self.streamer,
-                quantization_config=self.quantization_config
+                streamer=self.streamer,
+                max_new_tokens=20,
+                device_map='auto'
                 )
     
             self.assertIsNotNone(pipe)
+            self.assertEqual(pipe.task, 'text-generation')
 
         @classmethod
         def test_chat_response(self):
