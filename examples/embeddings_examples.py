@@ -54,3 +54,13 @@ pipe=PipelinesFactory.text_generation(
     )
 
 pipe("Melbourne is the capital of Victoria")
+
+conversation_model="facebook/blenderbot-400M-distill"
+msg = "why Melbourne is a good place to travel?"
+prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
+res = PipelinesFactory.chat_response(
+    conversation_model=conversation_model,
+    messages=msg,
+    prompt=prompt
+    )
+print(res)

@@ -60,3 +60,38 @@ class TestPipelinesFactory(unittest.TestCase):
     
             self.assertIsNotNone(pipe)
             self.assertEqual(pipe.task, 'text-generation')
+
+        @classmethod
+        def test_customized_pipe(cls):
+            """
+            Test customized_pipe method
+            """
+    
+            self.assertIsNotNone(self.model)
+    
+            pipe = PipelinesFactory.customized_pipe(
+                model=self.model,
+                tokenizer=self.tokenizer,
+                text_streamer=self.streamer,
+                quantization_config=self.quantization_config
+                )
+    
+            self.assertIsNotNone(pipe)
+
+        @classmethod
+        def test_chat_response(cls):
+            """
+            Test chat_response method
+            """
+            conversation_model="facebook/blenderbot-400M-distill"
+            msg = "why Melbourne is a good place to travel?"
+            prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
+            self.assertIsNotNone(self.model)
+
+            res = PipelinesFactory.chat_response(
+                conversation_model=conversation_model,
+                messages=msg,
+                prompt=prompt
+                )
+    
+            self.assertIsNotNone(res)
