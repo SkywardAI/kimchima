@@ -61,7 +61,6 @@ class TestPipelinesFactory(unittest.TestCase):
             self.assertIsNotNone(pipe)
             self.assertEqual(pipe.task, 'text-generation')
 
-        @classmethod
         def test_customized_pipe(self):
             """
             Test customized_pipe method
@@ -79,7 +78,6 @@ class TestPipelinesFactory(unittest.TestCase):
             self.assertIsNotNone(pipe)
             self.assertEqual(pipe.task, 'text-generation')
 
-        @classmethod
         def test_chat_response(self):
             """
             Test chat_response method
@@ -89,7 +87,7 @@ class TestPipelinesFactory(unittest.TestCase):
             prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
             
             res = PipelinesFactory.chat_response(
-                conversation_model=conversation_model,
+                conversation_model=self.model_name,
                 messages=msg,
                 prompt=prompt
                 )
