@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Auto - Debbug kimchima",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/kimchima/cmds/kimchima_cli.py",
             "console": "integratedTerminal",
