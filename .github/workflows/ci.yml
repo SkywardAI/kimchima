@@ -1,8 +1,5 @@
-name: 'Kimchima CI/CD 🚀'
+name: 'Kimchima CI 🚀'
 on:
-  # push:
-  #   branches:
-  #     - 'main'
   pull_request:
     branches:
       - 'main'
@@ -32,8 +29,8 @@ jobs:
            make lint
 
 
-  unittest_and_release:
-    name: 'Unittest and Release 🔬'
+  unittest:
+    name: 'Unittest 🔬'
     needs: [code_quality]
     strategy:
       matrix:
