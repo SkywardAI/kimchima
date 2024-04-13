@@ -1,4 +1,4 @@
-name: 'Kimchima Release 🚀'
+name: 'PyPI Release 🚀'
 on:
   push:
     tags:
