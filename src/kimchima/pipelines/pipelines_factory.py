@@ -74,35 +74,3 @@ class PipelinesFactory:
             **kwargs
         )
         return pipe
-    
-    @classmethod
-    def chat_response(cls, *args,**kwargs)-> str:
-        r"""
-        Get the chat response based on converation messages and suggestion answer
-        """
-        conversation_model=kwargs.pop("conversation_model", None)
-        if conversation_model is None:
-            raise ValueError("conversation_model is required")
-        summarization_model=kwargs.pop("summarization_model", "summarization")
-        messages=kwargs.pop("messages", None)
-        if messages is None:
-            raise ValueError("messages is required")
-        prompt=kwargs.pop("prompt", None)
-        max_length=kwargs.pop("max_length", None)
-        
-        #
-        chatbot = pipeline(model=conversation_model)
-        response = chatbot(messages)
-        
-        if prompt is None:
-            return response[0].get('generated_text')
-        
-        raw_response = prompt + response[0].get('generated_text')
-        
-        if max_length is None:
-            max_length = len(raw_response)
-
-        summarizer = pipeline(summarization_model)
-        response = summarizer(raw_response, min_length=5, max_length=max_length)
-        
-        return response[0].get('summary_text')

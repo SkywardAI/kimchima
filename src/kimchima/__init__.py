@@ -26,6 +26,9 @@ from kimchima.pkg import (
 
 from kimchima.pipelines import PipelinesFactory
 from kimchima.chat_template import ChatTemplateFactory
+
+from kimchima.utils import chat_summary
+
 __all__ = [
     'ModelFactory', 
     'TokenizerFactory', 
@@ -35,5 +38,6 @@ __all__ = [
     'Devices',
     'PipelinesFactory',
     'ChatTemplateFactory',
-    'DownloadHub'
+    'DownloadHub',
+    'chat_summary'
     ]

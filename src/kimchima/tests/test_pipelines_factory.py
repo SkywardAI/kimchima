@@ -77,18 +77,3 @@ class TestPipelinesFactory(unittest.TestCase):
     
             self.assertIsNotNone(pipe)
             self.assertEqual(pipe.task, 'text-generation')
-
-        def test_chat_response(self):
-            """
-            Test chat_response method
-            """
-            msg = "why Melbourne is a good place to travel?"
-            prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
-            
-            res = PipelinesFactory.chat_response(
-                conversation_model=self.model_name,
-                messages=msg,
-                prompt=prompt
-                )
-    
-            self.assertIsNotNone(res)
