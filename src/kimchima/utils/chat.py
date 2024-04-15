@@ -25,24 +25,23 @@ logger=logging.get_logger(__name__)
 
 def chat_summary(*args,**kwargs)-> str:
         r"""
-        Create a chat response and summarization pipeline using the Huggingface Transformers library.
         """
-        conversation_model=kwargs.pop("conversation_model", None)
-        if conversation_model is None:
-            raise ValueError("conversation_model is required")
-        summarization_model=kwargs.pop("summarization_model", None)
+        pipe_con=kwargs.pop("pipe_con", None)
+        if pipe_con is None:
+            raise ValueError("conversation pipeline is required")
+        
+        pipe_sum=kwargs.pop("pipe_sum", None)
+        if pipe_sum is None:
+            raise ValueError("summarization pipeline is required")
+        
         messages=kwargs.pop("messages", None)
         if messages is None:
             raise ValueError("messages is required")
+
         prompt=kwargs.pop("prompt", None)
         max_length=kwargs.pop("max_length", None)
         
-        # text generation pipeline
-        pipe=PipelinesFactory.customized_pipe(
-             model=conversation_model, 
-             device_map='auto'
-        )
-        response = pipe(messages)
+        response = pipe_con(messages)
         
         if prompt is None:
             return response[0].get('generated_text')
@@ -53,12 +52,6 @@ def chat_summary(*args,**kwargs)-> str:
             max_length = len(raw_response)
 
 
-        # pipeline for summarization
-        pipe=PipelinesFactory.customized_pipe(
-             model=summarization_model, 
-             device_map='auto'
-        )
-
-        response = pipe(raw_response, min_length=5, max_length=max_length)
+        response = pipe_sum(raw_response, min_length=5, max_length=max_length)
 
         return response[0].get('summary_text')
