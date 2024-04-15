@@ -16,33 +16,31 @@
 from __future__ import annotations
 
 from kimchima.pkg import logging
-from kimchima.pipelines import PipelinesFactory
-
 
 logger=logging.get_logger(__name__)
 
 
-
 def chat_summary(*args,**kwargs)-> str:
         r"""
-        Create a chat response and summarization pipeline using the Huggingface Transformers library.
         """
-        conversation_model=kwargs.pop("conversation_model", None)
-        if conversation_model is None:
-            raise ValueError("conversation_model is required")
-        summarization_model=kwargs.pop("summarization_model", None)
+        pipe_con=kwargs.pop("pipe_con", None)
+        if pipe_con is None:
+            raise ValueError("conversation pipeline is required")
+        
+        pipe_sum=kwargs.pop("pipe_sum", None)
+        if pipe_sum is None:
+            raise ValueError("summarization pipeline is required")
+        
         messages=kwargs.pop("messages", None)
         if messages is None:
             raise ValueError("messages is required")
+
         prompt=kwargs.pop("prompt", None)
         max_length=kwargs.pop("max_length", None)
         
-        # text generation pipeline
-        pipe=PipelinesFactory.customized_pipe(
-             model=conversation_model, 
-             device_map='auto'
-        )
-        response = pipe(messages)
+        response = pipe_con(messages)
+
+        logger.info("Finish conversation pipeline")
         
         if prompt is None:
             return response[0].get('generated_text')
@@ -52,13 +50,8 @@ def chat_summary(*args,**kwargs)-> str:
         if max_length is None:
             max_length = len(raw_response)
 
+        response = pipe_sum(raw_response, min_length=5, max_length=max_length)
 
-        # pipeline for summarization
-        pipe=PipelinesFactory.customized_pipe(
-             model=summarization_model, 
-             device_map='auto'
-        )
-
-        response = pipe(raw_response, min_length=5, max_length=max_length)
+        logger.info("Finish summarization pipeline")
 
         return response[0].get('summary_text')

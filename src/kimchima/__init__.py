@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__version__="0.3.1"
 
 from kimchima.pkg import (
     ModelFactory,
@@ -20,14 +19,16 @@ from kimchima.pkg import (
     EmbeddingsFactory,
     QuantizationFactory,
     StreamerFactory,
-    Devices,
-    DownloadHub
+    Devices
     )
 
 from kimchima.pipelines import PipelinesFactory
 from kimchima.chat_template import ChatTemplateFactory
 
-from kimchima.utils import chat_summary
+from kimchima.utils import (
+    chat_summary,
+    Downloader
+    )
 
 __all__ = [
     'ModelFactory', 
@@ -38,6 +39,6 @@ __all__ = [
     'Devices',
     'PipelinesFactory',
     'ChatTemplateFactory',
-    'DownloadHub',
-    'chat_summary'
+    'chat_summary',
+    'Downloader'
     ]

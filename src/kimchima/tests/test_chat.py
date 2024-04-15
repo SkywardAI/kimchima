@@ -14,25 +14,36 @@
 
 import unittest
 
+from kimchima.pipelines import PipelinesFactory
 from kimchima.utils.chat import chat_summary
 
 class TestChatSummary(unittest.TestCase):
+        
+        # prepare test data
+        def setUp(self):
+            self.conversation_model="gpt2"
+            self.summarization_model="sshleifer/distilbart-cnn-12-6"
+            self.msg = "why Melbourne is a good place to travel?"
+            self.max_length = 10
+            self.prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
+
+            # Load conversation model by using pipeline
+            self.pipe_con=PipelinesFactory.customized_pipe(model=self.conversation_model, device_map='auto')
+
+            self.pipe_sum=PipelinesFactory.customized_pipe(model=self.summarization_model, device_map='auto')
         
         @unittest.skip("skip test_chat_summary")
         def test_chat_summary(self):
             """
             Test chat_summary method
             """
-            conversation_model="gpt2"
-            summarization_model="sshleifer/distilbart-cnn-12-6"
-            msg = "why Melbourne is a good place to travel?"
-            prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
 
             res = chat_summary(
-                conversation_model=conversation_model,
-                summarization_model=summarization_model,
-                messages=msg,
-                prompt=prompt
+                pipe_con=self.pipe_con,
+                pipe_sum=self.pipe_sum,
+                messages=self.msg,
+                prompt=self.prompt,
+                max_length=self.max_length
                 )
 
             # res is str and should not be None
