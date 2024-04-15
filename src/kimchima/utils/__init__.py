@@ -14,5 +14,6 @@
 
 
 from .chat import chat_summary
+from .downloader import Downloader
 
-__all__ = [ "chat_summary"]
+__all__ = [ "chat_summary", "Downloader"]

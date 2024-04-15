@@ -16,11 +16,8 @@
 from __future__ import annotations
 
 from kimchima.pkg import logging
-from kimchima.pipelines import PipelinesFactory
-
 
 logger=logging.get_logger(__name__)
-
 
 
 def chat_summary(*args,**kwargs)-> str:
@@ -42,6 +39,8 @@ def chat_summary(*args,**kwargs)-> str:
         max_length=kwargs.pop("max_length", None)
         
         response = pipe_con(messages)
+
+        logger.info("Finish conversation pipeline")
         
         if prompt is None:
             return response[0].get('generated_text')
@@ -51,7 +50,8 @@ def chat_summary(*args,**kwargs)-> str:
         if max_length is None:
             max_length = len(raw_response)
 
-
         response = pipe_sum(raw_response, min_length=5, max_length=max_length)
+
+        logger.info("Finish summarization pipeline")
 
         return response[0].get('summary_text')

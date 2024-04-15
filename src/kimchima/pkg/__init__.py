@@ -20,7 +20,6 @@ from .quantization_factory import QuantizationFactory
 from .streamer_factory import StreamerFactory
 
 from .devices import Devices
-from .download_hub import DownloadHub
 
 __all__ = [
     'ModelFactory', 
@@ -29,6 +28,5 @@ __all__ = [
     'QuantizationFactory',
     'StreamerFactory',
 
-    'Devices',
-    'DownloadHub'
+    'Devices'
     ]
