@@ -36,20 +36,20 @@ class ModelFactory:
     @classmethod                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
     def auto_model(cls, *args, **kwargs)-> AutoModel:
         r"""
-        It is used to get the model from the Hugging Face Transformers AutoModel.
-        
-        Args:
-            pretrained_model_name_or_path: pretrained model name or path
+        Here we will use AutoModel from Huggingface to load the model form local.
+        It support a wider range of models beyond causal language models,
+        like BERT, RoBERTa, BART, T5 and more.
+
+        It returns the base model without a specific head, it does not directly
+        perform tasks like text generation or translation.
 
         """
         pretrained_model_name_or_path=kwargs.pop("pretrained_model_name_or_path", None)
         if pretrained_model_name_or_path is None:
             raise ValueError("pretrained_model_name_or_path cannot be None")
 
-        quantization_config=kwargs.pop("quantization_config", None)
         model = AutoModel.from_pretrained(
             pretrained_model_name_or_path,
-            quantization_config,
             **kwargs
         )
         logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
@@ -58,21 +58,17 @@ class ModelFactory:
     @classmethod
     def auto_model_for_causal_lm(cls, *args, **kwargs)-> AutoModelForCausalLM:
         r"""
-        It is used to get the model from the Hugging Face Transformers AutoModelForCausalLM.
-        
-        Args:
-            pretrained_model_name_or_path: pretrained model name or path
-
+        Here we will use AutoModelForCausalLM to load the model from local,
+        Like GPT-2 XLNet etc. 
+        It return a language modeling head which can be used to generate text,
+        translate text, write content, answer questions in a informative way.
         """
         pretrained_model_name_or_path=kwargs.pop("pretrained_model_name_or_path", None)
         if pretrained_model_name_or_path is None:
             raise ValueError("pretrained_model_name_or_path cannot be None")
 
-        quantization_config=kwargs.pop("quantization_config", None)
         model = AutoModelForCausalLM.from_pretrained(
-            pretrained_model_name_or_path, 
-            quantization_config=quantization_config,
-            device_map='auto',
+            pretrained_model_name_or_path,
             **kwargs
         )
         logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
