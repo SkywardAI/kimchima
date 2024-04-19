@@ -24,8 +24,6 @@ from kimchima.pkg import (
 class TestAutoFactory(unittest.TestCase):
 
     model_name = 'sentence-transformers/all-MiniLM-L6-v2'
-    model=None
-    tokenizer=None
 
     @classmethod
     def setUpClass(cls):

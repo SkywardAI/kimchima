@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from .chat import chat_summary
+from .dialog import Dialog
 from .downloader import Downloader
 
-__all__ = [ "chat_summary", "Downloader"]
+__all__ = [ "Dialog", "Downloader"]

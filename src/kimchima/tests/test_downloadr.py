@@ -15,19 +15,26 @@
 import unittest
 
 from kimchima.utils import Downloader
-from kimchima.pipelines import PipelinesFactory
+from kimchima.pkg import PipelinesFactory
 from kimchima.pkg import ModelFactory
 from kimchima.pkg import TokenizerFactory
 
 
 class TestDownloader(unittest.TestCase):
         
-        # prepare test data
-        def setUp(self):
-            self.model_name="gpt2"
-            self.folder_name="gpt2"
-            self.model_name_auto="sentence-transformers/all-MiniLM-L6-v2"
-            self.folder_name_auto="encoder"
+        model_name="gpt2"
+        folder_name="gpt2"
+        model_name_auto="sentence-transformers/all-MiniLM-L6-v2"
+        folder_name_auto="encoder"
+        
+
+        @classmethod
+        def setUpClass(cls):
+            r"""
+            THe attributes are needed to set up before the test cases are run.
+            """
+            pass
+
         
         @unittest.skip("skip test_model_downloader")
         def test_model_downloader(self):

@@ -31,7 +31,6 @@ class StreamerFactory:
     def __init__(self):
         raise EnvironmentError(
             "StreamerFactory is designed to be instantiated "
-            "using the `StreamerFactory.from_pretrained(pretrained_model_name_or_path)` method."
         )
     
     @classmethod

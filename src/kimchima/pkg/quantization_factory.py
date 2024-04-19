@@ -29,7 +29,6 @@ class QuantizationFactory:
     def __init__(self):
         raise EnvironmentError(
             "QuantizationFactory is designed to be instantiated "
-            "using the `QuantizationFactory.from_pretrained(pretrained_model_name_or_path)` method."
         )
     
     @classmethod

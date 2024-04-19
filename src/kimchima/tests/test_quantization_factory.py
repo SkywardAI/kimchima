@@ -18,6 +18,7 @@ from kimchima.pkg import QuantizationFactory
 
 class TestQuantizationFactory(unittest.TestCase):
 
+    unittest.skip("Skip this test cases which are needed GPU to run.")
     def test_quantization_4bit(self):
         """
         Test quantization_4bit method. This function is also test the quantization dependencies
