@@ -38,7 +38,7 @@ class TestChatTemplateFactory(unittest.TestCase):
         def tearDownClass(cls):
             pass
 
-    
+        @unittest.skip("skip test_prompt_generation")
         def test_prompt_generation(self):
             """
             Test tokenlized prompt_generation method

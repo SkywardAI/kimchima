@@ -15,28 +15,33 @@
 
 from __future__ import annotations
 
+
+import os
+import shutil
+
 from kimchima.pkg import logging
 from transformers import (
-    pipeline, 
     AutoModel,
     AutoTokenizer,
     AutoModelForCausalLM,
     )
-import shutil
-import os
 
 logger=logging.get_logger(__name__)
 
 
-
 class Downloader:
+    r"""
+    This class is designed to download the model from Huggingface and save it to the specified folder.
+    """
 
     def __init__(self):
         raise EnvironmentError(
             "Embeddings is designed to be instantiated "
             "using the `Embeddings.from_pretrained(pretrained_model_name_or_path)` method."
         )
-    def _move_files_and_remove_dir(src_folder, dst_folder):
+
+    @classmethod
+    def _move_files_and_remove_dir(cls, src_folder, dst_folder):
         for filename in os.listdir(src_folder):
             dst_file = os.path.join(dst_folder, filename)
             if os.path.exists(dst_file):
@@ -53,9 +58,13 @@ class Downloader:
         model_name=kwargs.pop("model_name", None)
         if model_name is None:
             raise ValueError("model_name is required")
+        
+        pipe=kwargs.pop("pipe", None)
+        if pipe is None:
+            raise ValueError("pipe is required")
 
         folder_name=kwargs.pop("folder_name", None)
-        pipe=pipeline(model=model_name)
+        
         pipe.save_pretrained(folder_name if folder_name is not None else model_name)
         logger.info(f"Model {model_name} has been downloaded successfully")
 
@@ -69,19 +78,37 @@ class Downloader:
 
         It returns the base model without a specific head, it does not directly
         perform tasks like text generation or translation.
+
+        Args:
+            model_name: str
+                The model name to download.
+            model: model instance
+                The model to download.
+            tokenizer: str
+                The tokenizer to download.
+            folder_name: str
+                The folder name to save the model.
         """
 
         model_name=kwargs.pop("model_name", None)
         if model_name is None:
             raise ValueError("model_name is required")
+        
+        model=kwargs.pop("model", None)
+        if model is None:
+            raise ValueError("model is required")
+        
+        tokenizer=kwargs.pop("tokenizer", None)
+        if tokenizer is None:
+            raise ValueError("tokenizer is required")
+
         folder_name=kwargs.pop("folder_name", None)
         if folder_name is None:
             folder_name = model_name
-        model=AutoModel.from_pretrained(model_name)
+
         # save_pretrained only saves the model weights, not the configuration
-        model.save_pretrained(folder_name )
+        model.save_pretrained(folder_name)
         
-        tokenizer=AutoTokenizer.from_pretrained(model_name)
         tokenizer.save_pretrained(folder_name + "/tmp1", legacy_format=False)
         tokenizer.save_pretrained(folder_name + "/tmp2", legacy_format=True)
 
@@ -101,11 +128,14 @@ class Downloader:
         model_name=kwargs.pop("model_name", None)
         if model_name is None:
             raise ValueError("model_name is required")
+        model=kwargs.pop("model", None)
+        if model is None:
+            raise ValueError("model is required")
 
         folder_name=kwargs.pop("folder_name", None)
         # https://github.com/huggingface/transformers/issues/25296
         # https://github.com/huggingface/accelerate/issues/661
-        model=AutoModelForCausalLM.from_pretrained(model_name)
+
         model.save_pretrained(folder_name if folder_name is not None else model_name)
         logger.info(f"Model {model_name} has been downloaded successfully")
 
@@ -117,10 +147,13 @@ class Downloader:
         model_name=kwargs.pop("model_name", None)
         if model_name is None:
             raise ValueError("model_name is required")
+        
+        tokenizer=kwargs.pop("tokenizer", None)
+        if tokenizer is None:
+            raise ValueError("tokenizer is required")
 
         folder_name=kwargs.pop("folder_name", None)
         
-        tokenizer=AutoTokenizer.from_pretrained(model_name)
         tokenizer.save_pretrained(folder_name if folder_name is not None else model_name)
         logger.info(f"Tokenizer {model_name} has been downloaded successfully")
 

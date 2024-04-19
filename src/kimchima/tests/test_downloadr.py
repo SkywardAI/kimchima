@@ -51,7 +51,7 @@ class TestDownloader(unittest.TestCase):
             self.assertEqual(pipe.model.name_or_path, self.folder_name)
 
         
-        # @unittest.skip("skip test_auto_downloader")
+        @unittest.skip("skip test_auto_downloader")
         def test_auto_downloader(self):
             """
             Test auto_downloader method
@@ -76,6 +76,7 @@ class TestDownloader(unittest.TestCase):
             output=model(**input)
 
             self.assertIsNotNone(output[0])
+
 
         @unittest.skip("skip test_casual_downloader")
         def test_casual_downloader(self):

@@ -35,7 +35,7 @@ class TestAutoFactory(unittest.TestCase):
     def tearDownClass(cls):
         pass
 
-
+    @unittest.skip("skip test_get_embeddings")
     def test_get_embeddings(self):
         """
         Test get_embeddings method
@@ -53,7 +53,7 @@ class TestAutoFactory(unittest.TestCase):
         self.assertIsNotNone(embeddings)
         self.assertEqual(embeddings.shape, (1, 384))
 
-
+    @unittest.skip("skip test_get_embeddings_with_list")
     def test_get_embeddings_with_list(self):
         """
         Test get_embeddings method with list

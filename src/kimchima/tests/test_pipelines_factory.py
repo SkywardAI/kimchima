@@ -18,7 +18,6 @@ from kimchima.pkg import (
     ModelFactory,
     TokenizerFactory,
     StreamerFactory,
-    QuantizationFactory,
     PipelinesFactory
 )
 
