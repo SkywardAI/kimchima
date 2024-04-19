@@ -22,6 +22,8 @@ from transformers import (
     AutoTokenizer,
     AutoModelForCausalLM,
     )
+import shutil
+import os
 
 logger=logging.get_logger(__name__)
 
@@ -34,7 +36,14 @@ class Downloader:
             "Embeddings is designed to be instantiated "
             "using the `Embeddings.from_pretrained(pretrained_model_name_or_path)` method."
         )
-    
+    def _move_files_and_remove_dir(src_folder, dst_folder):
+        for filename in os.listdir(src_folder):
+            dst_file = os.path.join(dst_folder, filename)
+            if os.path.exists(dst_file):
+                os.remove(dst_file)
+            shutil.move(os.path.join(src_folder, filename), dst_folder)
+        shutil.rmtree(src_folder)
+
     @classmethod
     def model_downloader(cls, *args, **kwargs):
         r"""
@@ -66,9 +75,18 @@ class Downloader:
         if model_name is None:
             raise ValueError("model_name is required")
         folder_name=kwargs.pop("folder_name", None)
-
+        if folder_name is None:
+            folder_name = model_name
         model=AutoModel.from_pretrained(model_name)
-        model.save_pretrained(folder_name if folder_name is not None else model_name)
+        # save_pretrained only saves the model weights, not the configuration
+        model.save_pretrained(folder_name )
+        
+        tokenizer=AutoTokenizer.from_pretrained(model_name)
+        tokenizer.save_pretrained(folder_name + "/tmp1", legacy_format=False)
+        tokenizer.save_pretrained(folder_name + "/tmp2", legacy_format=True)
+
+        for tmp_folder in ["/tmp1", "/tmp2"]:
+            cls._move_files_and_remove_dir(folder_name+ tmp_folder, folder_name)
         logger.info(f"Model {model_name} has been downloaded successfully")
 
     
@@ -105,3 +123,4 @@ class Downloader:
         tokenizer=AutoTokenizer.from_pretrained(model_name)
         tokenizer.save_pretrained(folder_name if folder_name is not None else model_name)
         logger.info(f"Tokenizer {model_name} has been downloaded successfully")
+
