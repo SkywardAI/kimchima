@@ -15,9 +15,12 @@
 import unittest
 
 from kimchima.utils import Downloader
-from kimchima.pkg import PipelinesFactory
-from kimchima.pkg import ModelFactory
-from kimchima.pkg import TokenizerFactory
+from kimchima.pkg import (
+    PipelinesFactory,
+    ModelFactory,
+    TokenizerFactory
+    )
+
 
 @unittest.skip("skip TestDownloader")
 class TestDownloader(unittest.TestCase):
@@ -40,7 +43,7 @@ class TestDownloader(unittest.TestCase):
             """
             Test model_downloader method
             """
-            Downloader.model_downloader(model_name=self.model_name, folder_name=self.folder_name)
+            Downloader.save_model_by_pipe(model_name=self.model_name, folder_name=self.folder_name)
             
             # load it from the folder
             pipe=PipelinesFactory.customized_pipe(model=self.folder_name, device_map='auto')

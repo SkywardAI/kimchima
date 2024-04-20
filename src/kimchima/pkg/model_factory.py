@@ -92,6 +92,9 @@ class ModelFactory:
         Like BART, T5 etc. 
         It return a sequence-to-sequence model which can be used to generate text,
         translate text, write content, answer questions in a informative way.
+
+        Args:
+            * pretrained_model_name_or_path: str: pretrained model name or path
         """
         pretrained_model_name_or_path=kwargs.pop("pretrained_model_name_or_path", None)
         if pretrained_model_name_or_path is None:
