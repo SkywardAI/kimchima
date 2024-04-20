@@ -96,3 +96,13 @@ class TestPipelinesFactory(unittest.TestCase):
     
             self.assertIsNotNone(pipe)
             self.assertEqual(pipe.task, 'text-generation')
+
+        def test_init_conversation(self):
+            """
+            Test init_conversation method
+            """
+            con = PipelinesFactory.init_conversation("how is the weather like in melbourne?")
+            con.add_message({"role": "assistant", "content": "The Big lebowski."})
+            con.add_message({"role": "user", "content": "Is it good?"})
+            self.assertIsNotNone(con)
+            self.assertEqual(con.messages[-1]["content"],"Is it good?")
