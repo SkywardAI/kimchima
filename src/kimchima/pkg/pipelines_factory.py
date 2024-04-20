@@ -17,7 +17,7 @@ from __future__ import annotations
 from functools import lru_cache
 from kimchima.pkg import logging
 
-from transformers import pipeline
+from transformers import pipeline, Conversation
 
 logger=logging.get_logger(__name__)
 
@@ -75,3 +75,16 @@ class PipelinesFactory:
             **kwargs
         )
         return pipe
+
+    @classmethod
+    def init_conversation (cls, *args,**kwargs)-> Conversation:
+        r"""
+        Create a Conversation using the Huggingface Transformers library.
+        """
+        
+        #
+        con=Conversation(
+            **kwargs
+        )
+        return con
+
