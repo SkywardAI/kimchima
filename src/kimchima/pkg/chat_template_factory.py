@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from typing import Union, List
 from kimchima.pkg import logging
 
 
@@ -30,7 +31,7 @@ class ChatTemplateFactory:
         )
 
     @classmethod
-    def prompt_generation(cls, *args,**kwargs)-> list[int]:
+    def prompt_generation(cls, *args,**kwargs)-> Union[List[int], str]:
         r"""
         Create prompt by using the Huggingface Transformers library.
         """
@@ -47,3 +48,25 @@ class ChatTemplateFactory:
         tokenized_chat  = tokenizer.apply_chat_template(messages, tokenize=tokenize, add_generation_prompt=add_generation_prompt)
 
         return tokenized_chat
+    
+    @classmethod
+    def prompt_directed_dialog(cls, *args, **kwargs)-> Union[List[int], str]:
+        r"""
+        """
+        knowledge=kwargs.pop("knowledge", None)
+
+        dialog=kwargs.pop("dialog", None)
+        if dialog is not None:
+            dialog='EOS'.join(dialog)
+        instruction=kwargs.pop("instruction", None)
+        context=kwargs.pop("context", None)
+        tokenizer=kwargs.pop("tokenizer", None)
+        if tokenizer is None:
+            raise ValueError("tokenizer is required")
+        tokenize=kwargs.pop("tokenize", False)
+
+        query=f"{instruction} {context} {dialog} {knowledge}"
+        tokenized_chat=tokenizer.apply_chat_template(query, tokenize=tokenize)
+
+        return tokenized_chat
+

@@ -63,3 +63,34 @@ class TestChatTemplateFactory(unittest.TestCase):
             self.assertEqual(self.tokenizer.decode(tokenized_chat[0]), "Hello")
             self.assertIsNotNone(non_tokenized_chat)
             self.assertEqual(len(non_tokenized_chat),147)
+
+        
+        def test_prompt_directed_dialog(self):
+            """
+            Test tokenlized prompt_directed_dialog method
+            """
+            knowledge = "The sky is blue"
+            dialog = ["Hello, how are you?", "I'm doing great. How can I help you today?", "I'd like to show off how chat templating works!"]
+            instruction = "Show me how chat templating works"
+            context = "Chat templating"
+    
+            tokenized_chat = ChatTemplateFactory.prompt_directed_dialog(
+                tokenizer=self.tokenizer,
+                knowledge=knowledge,
+                dialog=dialog,
+                instruction=instruction,
+                context=context,
+                tokenize=True
+                )
+            non_tokenized_chat = ChatTemplateFactory.prompt_directed_dialog(
+                tokenizer=self.tokenizer,
+                knowledge=knowledge,
+                dialog=dialog,
+                instruction=instruction,
+                context=context,
+                tokenize=False
+                )
+            self.assertIsNotNone(tokenized_chat)
+            self.assertEqual(self.tokenizer.decode(tokenized_chat[0]), "Hello")
+            self.assertIsNotNone(non_tokenized_chat)
+            self.assertEqual(len(non_tokenized_chat), 147)
