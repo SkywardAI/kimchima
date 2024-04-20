@@ -19,6 +19,7 @@ from kimchima.pkg import (
     ChatTemplateFactory
 )
 
+@unittest.skip("Skip TestChatTemplateFactory test class")
 class TestChatTemplateFactory(unittest.TestCase):
     
         model_name = 'gpt2'
@@ -38,7 +39,7 @@ class TestChatTemplateFactory(unittest.TestCase):
         def tearDownClass(cls):
             pass
 
-        @unittest.skip("skip test_prompt_generation")
+
         def test_prompt_generation(self):
             """
             Test tokenlized prompt_generation method

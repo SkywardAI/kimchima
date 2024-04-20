@@ -19,7 +19,7 @@ from kimchima.pkg import PipelinesFactory
 from kimchima.pkg import ModelFactory
 from kimchima.pkg import TokenizerFactory
 
-
+@unittest.skip("skip TestDownloader")
 class TestDownloader(unittest.TestCase):
         
         model_name="gpt2"
@@ -36,7 +36,6 @@ class TestDownloader(unittest.TestCase):
             pass
 
         
-        @unittest.skip("skip test_model_downloader")
         def test_model_downloader(self):
             """
             Test model_downloader method
@@ -51,7 +50,6 @@ class TestDownloader(unittest.TestCase):
             self.assertEqual(pipe.model.name_or_path, self.folder_name)
 
         
-        @unittest.skip("skip test_auto_downloader")
         def test_auto_downloader(self):
             """
             Test auto_downloader method
@@ -78,7 +76,6 @@ class TestDownloader(unittest.TestCase):
             self.assertIsNotNone(output[0])
 
 
-        @unittest.skip("skip test_casual_downloader")
         def test_casual_downloader(self):
             """
             Test casual_downloader method

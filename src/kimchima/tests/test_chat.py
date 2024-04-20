@@ -17,6 +17,7 @@ import unittest
 from kimchima.pkg import PipelinesFactory
 from kimchima.utils import Dialog
 
+@unittest.skip("skip TestChatSummary test class")
 class TestChatSummary(unittest.TestCase):
 
         conversation_model="gpt2"
@@ -32,7 +33,6 @@ class TestChatSummary(unittest.TestCase):
             cls.pipe_sum=PipelinesFactory.customized_pipe(model=cls.summarization_model, device_map='auto')
 
         
-        @unittest.skip("skip test_chat_summary")
         def test_chat_summary(self):
             """
             Test chat_summary method

@@ -18,13 +18,9 @@ from __future__ import annotations
 
 import os
 import shutil
+from functools import lru_cache
 
 from kimchima.pkg import logging
-from transformers import (
-    AutoModel,
-    AutoTokenizer,
-    AutoModelForCausalLM,
-    )
 
 logger=logging.get_logger(__name__)
 
@@ -50,6 +46,7 @@ class Downloader:
         shutil.rmtree(src_folder)
 
     @classmethod
+    @lru_cache(maxsize=1)
     def model_downloader(cls, *args, **kwargs):
         r"""
         Here we will use pipeline from Huggingface to download the model.
@@ -70,6 +67,7 @@ class Downloader:
 
     
     @classmethod
+    @lru_cache(maxsize=1)
     def auto_downloader(cls, *args, **kwargs):
         r"""
         Here we will use AutoModel from Huggingface to download the model.
@@ -118,6 +116,7 @@ class Downloader:
 
     
     @classmethod
+    @lru_cache(maxsize=1)
     def casual_downloader(cls, *args, **kwargs):
         r"""
         Here we will use AutoModelForCausalLM from Huggingface to download the model
@@ -140,6 +139,7 @@ class Downloader:
         logger.info(f"Model {model_name} has been downloaded successfully")
 
     @classmethod
+    @lru_cache(maxsize=1)
     def auto_token_downloader(cls, *args, **kwargs):
         r"""
         Here we will use AutoTokenizer from Huggingface to download the tokenizer congifuration.
