@@ -14,31 +14,31 @@
 
 import unittest
 
-from kimchima.pipelines import PipelinesFactory
-from kimchima.utils.chat import chat_summary
+from kimchima.pkg import PipelinesFactory
+from kimchima.utils import Dialog
 
+@unittest.skip("skip TestChatSummary test class")
 class TestChatSummary(unittest.TestCase):
-        
-        # prepare test data
-        def setUp(self):
-            self.conversation_model="gpt2"
-            self.summarization_model="sshleifer/distilbart-cnn-12-6"
-            self.msg = "why Melbourne is a good place to travel?"
-            self.max_length = 10
-            self.prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
 
+        conversation_model="gpt2"
+        summarization_model="sshleifer/distilbart-cnn-12-6"
+        msg = "why Melbourne is a good place to travel?"
+        max_length = 10
+        prompt = "Melbourne is often considered one of the most livable cities globally, offering a high quality of life."
+
+        @classmethod
+        def setUpClass(cls):
             # Load conversation model by using pipeline
-            self.pipe_con=PipelinesFactory.customized_pipe(model=self.conversation_model, device_map='auto')
+            cls.pipe_con=PipelinesFactory.customized_pipe(model=cls.conversation_model, device_map='auto')
+            cls.pipe_sum=PipelinesFactory.customized_pipe(model=cls.summarization_model, device_map='auto')
 
-            self.pipe_sum=PipelinesFactory.customized_pipe(model=self.summarization_model, device_map='auto')
         
-        @unittest.skip("skip test_chat_summary")
         def test_chat_summary(self):
             """
             Test chat_summary method
             """
 
-            res = chat_summary(
+            res = Dialog.chat_summary(
                 pipe_con=self.pipe_con,
                 pipe_sum=self.pipe_sum,
                 messages=self.msg,

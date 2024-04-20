@@ -15,26 +15,35 @@
 import unittest
 
 from kimchima.utils import Downloader
-from kimchima.pipelines import PipelinesFactory
-from kimchima.pkg import ModelFactory
-from kimchima.pkg import TokenizerFactory
+from kimchima.pkg import (
+    PipelinesFactory,
+    ModelFactory,
+    TokenizerFactory
+    )
 
 
+@unittest.skip("skip TestDownloader")
 class TestDownloader(unittest.TestCase):
         
-        # prepare test data
-        def setUp(self):
-            self.model_name="gpt2"
-            self.folder_name="gpt2"
-            self.model_name_auto="sentence-transformers/all-MiniLM-L6-v2"
-            self.folder_name_auto="encoder"
+        model_name="gpt2"
+        folder_name="gpt2"
+        model_name_auto="sentence-transformers/all-MiniLM-L6-v2"
+        folder_name_auto="encoder"
         
-        @unittest.skip("skip test_model_downloader")
+
+        @classmethod
+        def setUpClass(cls):
+            r"""
+            THe attributes are needed to set up before the test cases are run.
+            """
+            pass
+
+        
         def test_model_downloader(self):
             """
             Test model_downloader method
             """
-            Downloader.model_downloader(model_name=self.model_name, folder_name=self.folder_name)
+            Downloader.save_model_by_pipe(model_name=self.model_name, folder_name=self.folder_name)
             
             # load it from the folder
             pipe=PipelinesFactory.customized_pipe(model=self.folder_name, device_map='auto')
@@ -44,7 +53,6 @@ class TestDownloader(unittest.TestCase):
             self.assertEqual(pipe.model.name_or_path, self.folder_name)
 
         
-        # @unittest.skip("skip test_auto_downloader")
         def test_auto_downloader(self):
             """
             Test auto_downloader method
@@ -70,7 +78,7 @@ class TestDownloader(unittest.TestCase):
 
             self.assertIsNotNone(output[0])
 
-        @unittest.skip("skip test_casual_downloader")
+
         def test_casual_downloader(self):
             """
             Test casual_downloader method

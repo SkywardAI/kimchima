@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from functools import lru_cache
 from kimchima.pkg import logging
 
 from transformers import pipeline
@@ -33,6 +34,7 @@ class PipelinesFactory:
         )
 
     @classmethod
+    @lru_cache(maxsize=1)
     def text_generation(cls, *args,**kwargs)-> pipeline:
         r"""
         Create a text generation pipeline using the Huggingface Transformers library.
@@ -54,7 +56,6 @@ class PipelinesFactory:
             tokenizer=tokenizer,
             streamer=streamer,
             max_new_tokens=max_new_tokens,
-            device_map='auto',
             **kwargs
         )
 

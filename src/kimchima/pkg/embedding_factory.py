@@ -40,7 +40,6 @@ class EmbeddingsFactory:
     def __init__(self):
         raise EnvironmentError(
             "Embeddings is designed to be instantiated "
-            "using the `Embeddings.from_pretrained(pretrained_model_name_or_path)` method."
         )
 
 

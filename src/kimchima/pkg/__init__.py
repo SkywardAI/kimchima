@@ -13,13 +13,18 @@
 # limitations under the License.
 
 
+# We want to import extra modules only in this module, let pkg module be a tool
+# module for the kimchima package.
+
 from .model_factory import ModelFactory
 from .tokenizer_factory import TokenizerFactory
 from .embedding_factory import EmbeddingsFactory
 from .quantization_factory import QuantizationFactory
 from .streamer_factory import StreamerFactory
-
+from .pipelines_factory import PipelinesFactory
+from .chat_template_factory import ChatTemplateFactory
 from .devices import Devices
+
 
 __all__ = [
     'ModelFactory', 
@@ -27,6 +32,7 @@ __all__ = [
     'EmbeddingsFactory',
     'QuantizationFactory',
     'StreamerFactory',
-
+    'PipelinesFactory',
+    'ChatTemplateFactory',
     'Devices'
     ]

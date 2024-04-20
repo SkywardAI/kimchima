@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from functools import lru_cache
 from transformers import AutoTokenizer
 from kimchima.pkg import logging
 
@@ -32,10 +33,10 @@ class TokenizerFactory:
     def __init__(self):
         raise EnvironmentError(
             "TokenizerFactory is designed to be instantiated "
-            "using the `TokenizerFactory.from_pretrained(pretrained_model_name_or_path)` method."
         )
 
-    @classmethod                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    @classmethod
+    @lru_cache(maxsize=1)
     def auto_tokenizer(cls, pretrained_model_name_or_path, **kwargs)-> AutoTokenizer:
         r"""
         Create a tokenizer using the Huggingface Transformers AutoTokenizer class.

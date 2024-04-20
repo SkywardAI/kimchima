@@ -16,7 +16,6 @@ from __future__ import annotations
 
 from kimchima.pkg import logging
 
-from transformers import AutoTokenizer
 
 logger=logging.get_logger(__name__)
 
@@ -28,7 +27,6 @@ class ChatTemplateFactory:
     def __init__(self):
         raise EnvironmentError(
             "Chat Template is designed to be instantiated "
-            "using the `AutoTokenizer.from_pretrained(pretrained_model_name_or_path)` method."
         )
 
     @classmethod
@@ -36,17 +34,15 @@ class ChatTemplateFactory:
         r"""
         Create prompt by using the Huggingface Transformers library.
         """
-        model=kwargs.pop("model", None)
-        if model is None:
-            raise ValueError("model is required")
         messages=kwargs.pop("messages", None)
         if messages is None:
             raise ValueError("messages is required")
+        tokenizer=kwargs.pop("tokenizer", None)
+        if tokenizer is None:
+            raise ValueError("tokenizer is required")
 
         tokenize=kwargs.pop("tokenize", False)
         add_generation_prompt=kwargs.pop("add_generation_prompt", False)
-
-        tokenizer = AutoTokenizer.from_pretrained(model)
 
         tokenized_chat  = tokenizer.apply_chat_template(messages, tokenize=tokenize, add_generation_prompt=add_generation_prompt)
 

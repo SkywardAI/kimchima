@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from functools import lru_cache
 from kimchima.pkg import logging
 
 from transformers import (
@@ -31,10 +32,10 @@ class StreamerFactory:
     def __init__(self):
         raise EnvironmentError(
             "StreamerFactory is designed to be instantiated "
-            "using the `StreamerFactory.from_pretrained(pretrained_model_name_or_path)` method."
         )
     
     @classmethod
+    @lru_cache(maxsize=1)
     def text_streamer(cls, *args, **kwargs)-> TextStreamer:
         r"""
         Get streamer for text generation task.
@@ -60,6 +61,7 @@ class StreamerFactory:
         return streamer
     
     @classmethod
+    @lru_cache(maxsize=1)
     def text_iterator_streamer(cls, *args, **kwargs)-> TextIteratorStreamer:
         r"""
         Get streamer for text generation task.

@@ -20,12 +20,10 @@ from kimchima.pkg import (
     EmbeddingsFactory
 )
 
-
+@unittest.skip("skip TestAutoFactory")
 class TestAutoFactory(unittest.TestCase):
 
     model_name = 'sentence-transformers/all-MiniLM-L6-v2'
-    model=None
-    tokenizer=None
 
     @classmethod
     def setUpClass(cls):

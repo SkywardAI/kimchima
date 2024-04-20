@@ -19,14 +19,13 @@ from kimchima.pkg import (
     EmbeddingsFactory,
     QuantizationFactory,
     StreamerFactory,
+    PipelinesFactory,
+    ChatTemplateFactory,
     Devices
     )
 
-from kimchima.pipelines import PipelinesFactory
-from kimchima.chat_template import ChatTemplateFactory
-
 from kimchima.utils import (
-    chat_summary,
+    Dialog,
     Downloader
     )
 
@@ -39,6 +38,6 @@ __all__ = [
     'Devices',
     'PipelinesFactory',
     'ChatTemplateFactory',
-    'chat_summary',
+    'Dialog',
     'Downloader'
     ]

@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from functools import lru_cache
 from kimchima.pkg import logging
 
 import torch
@@ -29,10 +30,10 @@ class QuantizationFactory:
     def __init__(self):
         raise EnvironmentError(
             "QuantizationFactory is designed to be instantiated "
-            "using the `QuantizationFactory.from_pretrained(pretrained_model_name_or_path)` method."
         )
     
     @classmethod
+    @lru_cache(maxsize=1)
     def quantization_4bit(cls, *args, **kwargs)-> BitsAndBytesConfig:
         r"""
         4 bit quantization
@@ -47,6 +48,7 @@ class QuantizationFactory:
         return config
     
     @classmethod
+    @lru_cache(maxsize=1)
     def quantization_8bit(cls, *args, **kwargs)-> BitsAndBytesConfig:
         r"""
         8 bit quantization

@@ -20,33 +20,43 @@ from kimchima.pkg import logging
 logger=logging.get_logger(__name__)
 
 
-def chat_summary(*args,**kwargs)-> str:
+class Dialog:
+     
+    def __init__(self):
+        raise EnvironmentError(
+            "Dialog is designed to be instantiated "
+            "using the `Dialog.chat_summary()` method."
+        )
+
+    @classmethod
+    def chat_summary(clas, *args,**kwargs)-> str:
         r"""
+        Chat and summarize the conversation.
         """
         pipe_con=kwargs.pop("pipe_con", None)
         if pipe_con is None:
             raise ValueError("conversation pipeline is required")
-        
+            
         pipe_sum=kwargs.pop("pipe_sum", None)
         if pipe_sum is None:
             raise ValueError("summarization pipeline is required")
-        
+            
         messages=kwargs.pop("messages", None)
         if messages is None:
             raise ValueError("messages is required")
 
         prompt=kwargs.pop("prompt", None)
         max_length=kwargs.pop("max_length", None)
-        
+            
         response = pipe_con(messages)
 
         logger.info("Finish conversation pipeline")
-        
+            
         if prompt is None:
             return response[0].get('generated_text')
-        
+            
         raw_response = prompt + response[0].get('generated_text')
-        
+            
         if max_length is None:
             max_length = len(raw_response)
 

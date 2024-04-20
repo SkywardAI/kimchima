@@ -14,8 +14,16 @@
 
 from __future__ import annotations
 
-from transformers import AutoModel, AutoModelForCausalLM
+from functools import lru_cache
 from kimchima.pkg import logging
+
+from transformers import (
+    AutoModel, 
+    AutoModelForCausalLM,
+    AutoModelForSeq2SeqLM
+    )
+
+
 
 logger = logging.get_logger(__name__)
 
@@ -30,10 +38,10 @@ class ModelFactory:
     def __init__(self):
         raise EnvironmentError(
             "ModelFactory is designed to be instantiated "
-            "using the `ModelFactory.from_pretrained(pretrained_model_name_or_path)` method."
         )
 
-    @classmethod                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    @classmethod
+    @lru_cache(maxsize=1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     def auto_model(cls, *args, **kwargs)-> AutoModel:
         r"""
         Here we will use AutoModel from Huggingface to load the model form local.
@@ -56,6 +64,7 @@ class ModelFactory:
         return model
     
     @classmethod
+    @lru_cache(maxsize=1)
     def auto_model_for_causal_lm(cls, *args, **kwargs)-> AutoModelForCausalLM:
         r"""
         Here we will use AutoModelForCausalLM to load the model from local,
@@ -74,3 +83,26 @@ class ModelFactory:
         logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
         return model
 
+
+    @classmethod
+    @lru_cache(maxsize=1)
+    def model_for_seq2seq(cls, *args, **kwargs)-> AutoModelForSeq2SeqLM:
+        r"""
+        Here we will use AutoModelForSeq2SeqLM to load the model from local,
+        Like BART, T5 etc. 
+        It return a sequence-to-sequence model which can be used to generate text,
+        translate text, write content, answer questions in a informative way.
+
+        Args:
+            * pretrained_model_name_or_path: str: pretrained model name or path
+        """
+        pretrained_model_name_or_path=kwargs.pop("pretrained_model_name_or_path", None)
+        if pretrained_model_name_or_path is None:
+            raise ValueError("pretrained_model_name_or_path cannot be None")
+
+        model = AutoModelForSeq2SeqLM.from_pretrained(
+            pretrained_model_name_or_path,
+            **kwargs
+        )
+        logger.debug(f"Loaded model: {pretrained_model_name_or_path}")
+        return model
