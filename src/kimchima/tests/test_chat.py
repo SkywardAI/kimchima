@@ -37,11 +37,14 @@ class TestChatSummary(unittest.TestCase):
             """
             Test chat_summary method
             """
-
+            con = PipelinesFactory.init_conversation()
+            con.add_message({"role": "user", "content": "Dod you like weather of Melbourne?"})
+            con.add_message({"role": "assistant", "content": "Melbourne is also sunny which is my favourite weather"})
+            con.add_message({"role": "user", "content": "why Melbourne is a good place to travel?"})
             res = Dialog.chat_summary(
                 pipe_con=self.pipe_con,
                 pipe_sum=self.pipe_sum,
-                messages=self.msg,
+                messages=con,
                 prompt=self.prompt,
                 max_length=self.max_length
                 )
