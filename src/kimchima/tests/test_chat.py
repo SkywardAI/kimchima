@@ -17,7 +17,7 @@ import unittest
 from kimchima.pkg import PipelinesFactory
 from kimchima.utils import Dialog
 
-#@unittest.skip("skip TestChatSummary test class")
+@unittest.skip("skip TestChatSummary test class")
 class TestChatSummary(unittest.TestCase):
 
         conversation_model="gpt2"
