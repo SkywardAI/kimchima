@@ -29,7 +29,7 @@ class Dialog:
         )
 
     @classmethod
-    def chat_summary(clas, *args,**kwargs)-> str:
+    def chat_summary(cls, *args,**kwargs)-> str:
         r"""
         Chat and summarize the conversation.
         """
@@ -64,3 +64,48 @@ class Dialog:
         logger.info("Finish summarization pipeline")
 
         return response[0].get('summary_text')
+    
+    @classmethod
+    def dialog_with_pipe(cls, *args, **kwargs):
+        r"""
+        Conversational pipeline with the conversation.
+
+        Args:
+            * conver_pipe: pipeline with `conversational` task
+                * like pipeline(task='conversational',model="microsoft/GODEL-v1_1-base-seq2seq", tokenizer=tokenizer)
+            * con: Huggingface transformers Conversation class instance
+            * **kwargs:
+                * max_length: maximum length of the response
+                * min_length: minimum length of the response
+                * top_k: top k tokens to sample from
+                * top_p: top p tokens to sample from
+                * temperature: temperature of the sampling
+                * do_sample: whether to sample
+        """
+        conver_pipe=kwargs.pop("conver_pipe", None)
+        if conver_pipe is None:
+            raise ValueError("conversation pipeline is required")
+        
+        con=kwargs.pop("con", None)
+        if con is None:
+            raise ValueError("con is required")
+        
+        return conver_pipe(con, **kwargs)
+    
+    @classmethod
+    def summary_with_pipe(cls, *args, **kwargs):
+        r"""
+        Summary conversaion records with the summarization pipeline.
+        """
+        summary_pipe=kwargs.pop("summary_pipe", None)
+        if summary_pipe is None:
+            raise ValueError("summary pipeline is required")
+
+        paragraph=kwargs.pop("paragraph", None)
+        if paragraph is None:
+            raise ValueError("paragraph is required")
+
+        return summary_pipe(paragraph, **kwargs)
+
+
+        

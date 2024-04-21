@@ -91,6 +91,7 @@ class Downloader:
         
         folder_name=kwargs.pop("folder_name", None)
         if folder_name is None:
+            #TODO folder_name equal to model_name will casue download issue
             folder_name = model_name
 
         # save_pretrained only saves the model weights, not the configuration
