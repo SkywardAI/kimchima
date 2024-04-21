@@ -51,11 +51,10 @@ class Dialog:
         response = pipe_con(messages)
 
         logger.info("Finish conversation pipeline")
-            
         if prompt is None:
-            return response[0].get('generated_text')
+            return response.messages[-1]["content"]
             
-        raw_response = prompt + response[0].get('generated_text')
+        raw_response = prompt + response.messages[-1]["content"]
             
         if max_length is None:
             max_length = len(raw_response)
