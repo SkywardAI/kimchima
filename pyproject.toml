@@ -14,7 +14,7 @@ keywords = ["transformers", "pytorch"]
 [tool.poetry.dependencies]
 python = "^3.11"
 torch = "2.2.2"
-transformers = "4.39.2"
+transformers = "4.40.0"
 sentencepiece = "0.2.0"
 bitsandbytes = "0.43.0"
 accelerate = "0.28.0"
@@ -22,7 +22,7 @@ datasets = "2.18.0"
 
 [tool.poetry.group.dev.dependencies]
 torch = "2.2.2"
-transformers = "4.39.2"
+transformers = "4.40.0"
 sentencepiece = "0.2.0"
 bitsandbytes = "0.43.0"
 accelerate = "0.28.0"
