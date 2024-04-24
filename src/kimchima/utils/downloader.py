@@ -91,8 +91,9 @@ class Downloader:
         
         folder_name=kwargs.pop("folder_name", None)
         if folder_name is None:
-            #TODO folder_name equal to model_name will casue download issue
-            folder_name = model_name
+            raise ValueError("folder_name is required")
+        if model_name == folder_name:
+            raise ValueError("folder_name should not be equal to model_name")
 
         # save_pretrained only saves the model weights, not the configuration
         model=ModelFactory.auto_model(pretrained_model_name_or_path=model_name)
