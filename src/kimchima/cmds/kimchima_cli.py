@@ -14,7 +14,7 @@
 
 import argparse
 
-from kimchima.cmds.auto_cli import CommandCrossEncoder
+from kimchima.cmds.auto_cli import CommandAutoModel
 
 
 def main():
@@ -31,7 +31,7 @@ def main():
     parser_auto=subparsers.add_parser("auto", help="auto help")
     parser_auto.add_argument("model_name_or_path", default="sentence-transformers/all-MiniLM-L6-v2", help="model name or path")
     parser_auto.add_argument("text", help="text str or list of text str")
-    parser_auto.set_defaults(func=CommandCrossEncoder.auto)
+    parser_auto.set_defaults(func=CommandAutoModel.auto)
 
     args = parser.parse_args()
     args.func(args)
