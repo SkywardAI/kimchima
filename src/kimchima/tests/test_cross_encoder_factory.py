@@ -49,6 +49,7 @@ class TestCrossEncoderFactory(unittest.TestCase):
         self.assertIsNotNone(self.encoder)
         sentence_combinations = [[self.query, sentence] for sentence in self.corpus]
         scores = self.encoder.predict(sentence_combinations)
+        self.assertIsNotNone(scores)
         
     def test_rank(self):
         """
@@ -57,10 +58,7 @@ class TestCrossEncoderFactory(unittest.TestCase):
 
         ranks = self.encoder.rank(self.query, self.corpus)
 
-        # Print the scores
-        print("Query:", self.query)
-        for rank in ranks:
-            print(f"{rank['score']:.2f}\t{self.corpus[rank['corpus_id']]}")
+        self.assertIsNotNone(ranks)
 
 
 
