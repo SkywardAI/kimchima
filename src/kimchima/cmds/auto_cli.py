@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from kimchima.pkg import ModelFactory
+from kimchima.pkg import ModelFactory, CrossEncoderFactory
 
 
 class CommandAutoModel:
@@ -40,4 +40,46 @@ class CommandAutoModel:
         """
         model = ModelFactory.auto_model(pretrained_model_name_or_path=args.model_name_or_path)
         print(model.config)
+
+class CommandCrossEncoder:
+    """
+    A class for loading models.
+    """
+
+    @staticmethod
+    def auto(args):
+        """
+        Get embeddings of text.
+
+        Args:
+            args (argparse.Namespace): The arguments.
+
+        Returns:
+            torch.tensor: The embeddings of text.
+        """
+        query = "A man is eating pasta."
+
+        # With all sentences in the corpus
+        corpus = [
+            "A man is eating food.",
+            "A man is eating a piece of bread.",
+            "The girl is carrying a baby.",
+            "A man is riding a horse.",
+            "A woman is playing violin.",
+            "Two men pushed carts through the woods.",
+            "A man is riding a white horse on an enclosed ground.",
+            "A monkey is playing drums.",
+            "A cheetah is running behind its prey.",
+        ]
+        model = CrossEncoderFactory('cross-encoder/ms-marco-MiniLM-L-6-v2')
+        sentence_combinations = [[query, sentence] for sentence in corpus]
+        scores = model.predict(sentence_combinations)
+        print(scores)
+        ranks = model.rank(query, corpus)
+
+        # Print the scores
+        print("Query:", query)
+        for rank in ranks:
+            print(f"{rank['score']:.2f}\t{corpus[rank['corpus_id']]}")
+
 

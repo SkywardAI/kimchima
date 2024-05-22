@@ -1,24 +1,16 @@
-from functools import wraps
-
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, AutoConfig
 import numpy as np
-import logging
-import os
-from typing import Dict, Type, Callable, List, Optional
+from kimchima.pkg import logging
+import platform
+from typing import Dict, List, Optional
 import torch
 from torch import nn
-from torch.optim import Optimizer
 from torch.utils.data import DataLoader
-from tqdm.autonotebook import tqdm, trange
-from transformers import is_torch_npu_available
+from tqdm.autonotebook import tqdm
 from transformers.utils import PushToHubMixin
 
-from .. import SentenceTransformer, util
-from ..evaluation import SentenceEvaluator
-from ..util import get_device_name
 
-
-logger = logging.getLogger(__name__)
+logger=logging.get_logger(__name__)
 
 
 class CrossEncoderFactory(PushToHubMixin):
@@ -62,7 +54,6 @@ class CrossEncoderFactory(PushToHubMixin):
         trust_remote_code: bool = False,
         revision: Optional[str] = None,
         local_files_only: bool = False,
-        default_activation_function=None,
         classifier_dropout: float = None,
     ):
         self.config = AutoConfig.from_pretrained(
@@ -100,30 +91,19 @@ class CrossEncoderFactory(PushToHubMixin):
         self.max_length = max_length
 
         if device is None:
-            device = get_device_name()
+            if platform.system() == 'Darwin':
+                device='mps'
+            elif torch.cuda.is_available():
+                device='cuda'
+            else:
+                device='cpu'
             logger.info("Use pytorch device: {}".format(device))
 
         self._target_device = torch.device(device)
 
-        if default_activation_function is not None:
-            self.default_activation_function = default_activation_function
-            try:
-                self.config.sbert_ce_default_activation_function = util.fullname(self.default_activation_function)
-            except Exception as e:
-                logger.warning(
-                    "Was not able to update config about the default_activation_function: {}".format(str(e))
-                )
-        elif (
-            hasattr(self.config, "sbert_ce_default_activation_function")
-            and self.config.sbert_ce_default_activation_function is not None
-        ):
-            self.default_activation_function = util.import_from_string(
-                self.config.sbert_ce_default_activation_function
-            )()
-        else:
-            self.default_activation_function = nn.Sigmoid() if self.config.num_labels == 1 else nn.Identity()
+        self.default_activation_function = nn.Sigmoid() if self.config.num_labels == 1 else nn.Identity()
 
-    def smart_batching_collate_text_only(self, batch):
+    def _smart_batching_collate_text_only(self, batch):
         texts = [[] for _ in range(len(batch[0]))]
 
         for example in batch:
@@ -171,7 +151,7 @@ class CrossEncoderFactory(PushToHubMixin):
         inp_dataloader = DataLoader(
             sentences,
             batch_size=batch_size,
-            collate_fn=self.smart_batching_collate_text_only,
+            collate_fn=self._smart_batching_collate_text_only,
             num_workers=num_workers,
             shuffle=False,
         )
