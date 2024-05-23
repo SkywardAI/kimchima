@@ -30,6 +30,7 @@ from kimchima.utils import (
     )
 
 __all__ = [
+    'CrossEncoderFactory',
     'ModelFactory', 
     'TokenizerFactory', 
     'EmbeddingsFactory',

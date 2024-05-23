@@ -17,6 +17,7 @@
 # module for the kimchima package.
 
 from .model_factory import ModelFactory
+from .cross_encoder_factory import CrossEncoderFactory
 from .tokenizer_factory import TokenizerFactory
 from .embedding_factory import EmbeddingsFactory
 from .quantization_factory import QuantizationFactory
@@ -27,6 +28,7 @@ from .devices import Devices
 
 
 __all__ = [
+    'CrossEncoderFactory',
     'ModelFactory', 
     'TokenizerFactory', 
     'EmbeddingsFactory',
