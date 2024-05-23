@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kimchima"
-version = "0.5.1"
+version = "0.5.2"
 description = "The collections of tools for ML model development."
 authors = ["Aisuko <urakiny@gmail.com>"]
 license = "Apache-2.0"
