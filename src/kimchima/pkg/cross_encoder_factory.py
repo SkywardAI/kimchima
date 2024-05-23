@@ -12,6 +12,11 @@ from transformers.utils import PushToHubMixin
 
 logger=logging.get_logger(__name__)
 
+"""
+Original code from: https://github.com/UKPLab/sentence-transformers/blob/master/sentence_transformers/cross_encoder/CrossEncoder.py
+Adapted by: Rob Zhang
+Date: 20240523
+"""
 
 class CrossEncoderFactory(PushToHubMixin):
     """
