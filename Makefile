@@ -25,6 +25,10 @@ build:
 lock:
 	@poetry lock
 
+.PHONY: shell
+shell:
+	@poetry shell
+
 .PHONY: install
 install:
 	@poetry install -vvv

@@ -15,7 +15,7 @@ See examples in the [examples](./examples) directory.
 
 # Development
 
-Please kindly check the .devcontainer directory for the development environment setup.
+See [Development Guide](./docs/Development.md).
 
 # Acknowledgement
 
