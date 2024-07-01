@@ -14,14 +14,14 @@ keywords = ["transformers", "pytorch"]
 [tool.poetry.dependencies]
 python = "^3.11"
 torch = "2.2.2"
-transformers = "4.39.2"
+transformers = "4.42.3"
 accelerate = "0.28.0"
 datasets = "2.18.0"
 
 [tool.poetry.group.dev.dependencies]
 python = "^3.11"
 torch = "2.2.2"
-transformers = "4.39.2"
+transformers = "4.42.3"
 accelerate = "0.28.0"
 datasets = "2.18.0"
 
