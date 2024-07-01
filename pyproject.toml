@@ -16,14 +16,14 @@ python = "^3.11"
 torch = "2.2.2"
 transformers = "4.39.2"
 accelerate = "0.28.0"
-datasets = "2.18.0"
+datasets = "2.20.0"
 
 [tool.poetry.group.dev.dependencies]
 python = "^3.11"
 torch = "2.2.2"
 transformers = "4.39.2"
 accelerate = "0.28.0"
-datasets = "2.18.0"
+datasets = "2.20.0"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
