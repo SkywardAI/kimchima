@@ -21,6 +21,9 @@ poetry:
 build:
 	@poetry build
 
+.PHONY: lock
+lock:
+	@poetry lock
 
 .PHONY: install
 install:

@@ -20,7 +20,6 @@ from .model_factory import ModelFactory
 from .cross_encoder_factory import CrossEncoderFactory
 from .tokenizer_factory import TokenizerFactory
 from .embedding_factory import EmbeddingsFactory
-from .quantization_factory import QuantizationFactory
 from .streamer_factory import StreamerFactory
 from .pipelines_factory import PipelinesFactory
 from .chat_template_factory import ChatTemplateFactory
@@ -32,7 +31,6 @@ __all__ = [
     'ModelFactory', 
     'TokenizerFactory', 
     'EmbeddingsFactory',
-    'QuantizationFactory',
     'StreamerFactory',
     'PipelinesFactory',
     'ChatTemplateFactory',
