@@ -15,7 +15,6 @@
 
 import unittest
 import torch
-from models.simple_nn import SimpleNN
 from trainers.simple_trainer import SimpleTrainer
 
 
