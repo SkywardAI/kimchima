@@ -1,42 +1,20 @@
-import torch
-from torch.utils.tensorboard import SummaryWriter
+# coding=utf-8
 
-writer = SummaryWriter()
+# Copyright [2024] [SkywardAI]
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 
+#        http://www.apache.org/licenses/LICENSE-2.0
 
-x = torch.arange(-5, 5, 0.1).view(-1, 1)
-y = -5 * x + 0.1 * torch.randn(x.size())
-
-model = torch.nn.Linear(1, 1)
-criterion = torch.nn.MSELoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
-
-
-def train_model(iter):
-    for epoch in range(iter):
-        y1 = model(x)
-        loss = criterion(y1, y)
-        writer.add_scalar("Loss/train", loss, epoch)
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-
-
-train_model(10)
-writer.flush()
-
-
-writer.close()
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 
 class SimpleNN:
     def __init__(self):
         pass
 
-    @classmethod
-    def forward_pass(cls):
-        pass
-
-    @classmethod
-    def backward_pass(cls):
-        return True
