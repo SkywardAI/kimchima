@@ -43,7 +43,7 @@ lint:
 
 .PHONY: test
 test:
-	@poetry run python -m unittest discover ${TESTDIR} -v
+	@poetry run python -m pytest -v
 
 
 # build and publish

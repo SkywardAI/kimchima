@@ -1,17 +1,16 @@
-
-
 import torch
-# https://github.com/tensorflow/tensorflow/issues/2115#issuecomment-497307252
-from torch.utils.tensorboard.writer import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
+
 writer = SummaryWriter()
 
-# log scalars
+
 x = torch.arange(-5, 5, 0.1).view(-1, 1)
 y = -5 * x + 0.1 * torch.randn(x.size())
 
 model = torch.nn.Linear(1, 1)
 criterion = torch.nn.MSELoss()
-optimizer = torch.optim.SGD(model.parameters(), lr = 0.1)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+
 
 def train_model(iter):
     for epoch in range(iter):
@@ -22,8 +21,22 @@ def train_model(iter):
         loss.backward()
         optimizer.step()
 
-train_model(5)
+
+train_model(10)
 writer.flush()
 
 
 writer.close()
+
+
+class SimpleNN:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def forward_pass(cls):
+        pass
+
+    @classmethod
+    def backward_pass(cls):
+        return True

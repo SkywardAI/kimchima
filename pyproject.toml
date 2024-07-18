@@ -25,6 +25,7 @@ torch = "2.3.0"
 torchvision = "0.18.0" # https://pypi.org/project/torchvision/0.18.0/
 tensorboard = "2.17.0"
 transformers = "4.39.2"
+ruff = "0.5.2"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -104,6 +105,7 @@ docstring-code-format = true
 # This only has an effect when the `docstring-code-format` setting is
 # enabled.
 docstring-code-line-length = "dynamic"
+
 
 
 [build-system]
