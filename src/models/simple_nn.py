@@ -1,5 +1,6 @@
 # coding=utf-8
-# Copyright [2024] [Aisuko]
+
+# Copyright [2024] [SkywardAI]
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -13,30 +14,7 @@
 # limitations under the License.
 
 
-from kimchima.pkg import (
-    ModelFactory,
-    TokenizerFactory,
-    EmbeddingsFactory,
-    StreamerFactory,
-    PipelinesFactory,
-    ChatTemplateFactory,
-    Devices
-    )
+class SimpleNN:
+    def __init__(self):
+        pass
 
-from kimchima.utils import (
-    Dialog,
-    Downloader
-    )
-
-__all__ = [
-    'CrossEncoderFactory',
-    'ModelFactory', 
-    'TokenizerFactory', 
-    'EmbeddingsFactory',
-    'StreamerFactory',
-    'Devices',
-    'PipelinesFactory',
-    'ChatTemplateFactory',
-    'Dialog',
-    'Downloader'
-    ]

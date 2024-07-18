@@ -31,7 +31,11 @@ shell:
 
 .PHONY: install
 install:
-	@poetry install -vvv
+	@poetry install -vvv --no-root
+
+.PHONY: install-dev
+install-dev:
+	@poetry install -vvv --no-root
 
 .PHONY: lint
 lint:
@@ -39,7 +43,7 @@ lint:
 
 .PHONY: test
 test:
-	@poetry run python -m unittest discover ${TESTDIR} -v
+	@poetry run python -m pytest -v
 
 
 # build and publish
