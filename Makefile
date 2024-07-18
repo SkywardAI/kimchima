@@ -31,7 +31,11 @@ shell:
 
 .PHONY: install
 install:
-	@poetry install -vvv
+	@poetry install -vvv --no-root
+
+.PHONY: install-dev
+install-dev:
+	@poetry install -vvv --no-root
 
 .PHONY: lint
 lint:
