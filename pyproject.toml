@@ -26,7 +26,7 @@ torchvision = "0.18.0" # https://pypi.org/project/torchvision/0.18.0/
 tensorboard = "2.17.0"
 transformers = "4.39.2"
 ruff = "0.5.2"
-pytest = "8.2.2"
+pytest = "8.3.2"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
