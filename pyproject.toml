@@ -16,7 +16,7 @@ python = "^3.11"
 torch = "2.3.0" # numpy 2.0.0 and 1.26.4 https://github.com/pytorch/pytorch/issues/107302#issuecomment-2048405223
 torchvision = "0.18.0"
 tensorboard = "2.17.0"
-transformers = "4.39.2"
+transformers = "4.43.3"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -24,7 +24,7 @@ python = "^3.11"
 torch = "2.3.0"
 torchvision = "0.18.0" # https://pypi.org/project/torchvision/0.18.0/
 tensorboard = "2.17.0"
-transformers = "4.39.2"
+transformers = "4.43.3"
 ruff = "0.5.2"
 pytest = "8.2.2"
 
