@@ -17,16 +17,16 @@
 import requests
 from pathlib import Path
 
-class DatasetHelper:
 
+class DatasetHelper:
     def __init__(self) -> None:
         raise Exception("This class is not meant to be instantiated")
 
     @classmethod
-    def download_remote_file(cls, url:str, filename:Path)->str:
+    def download_remote_file(cls, url: str, filename: Path) -> str:
         response = requests.get(url)
         response.raise_for_status()
-        with open(filename, 'wb') as f:
+        with open(filename, "wb") as f:
             f.write(response.content)
 
         return filename

@@ -20,43 +20,36 @@ from pathlib import Path
 from models.simple_gpt import SimpleGPT, SimpleGPTTrainer
 from pkg.dataset_helper import DatasetHelper
 
-class TestSimpleGPT(unittest.TestCase):
 
+class TestSimpleGPT(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         src_dir = Path(os.path.dirname(os.path.abspath(__file__))).parent
-        abs_file_path = os.path.join(src_dir, 'input.txt')
-        _=DatasetHelper.download_remote_file(SimpleGPTTrainer.ds_url, abs_file_path)
+        abs_file_path = os.path.join(src_dir, "input.txt")
+        _ = DatasetHelper.download_remote_file(SimpleGPTTrainer.ds_url, abs_file_path)
 
-        cls.dataset=SimpleGPTTrainer.load_data(abs_file_path)
-        cls.chars=SimpleGPTTrainer.unique_chars(cls.dataset)
-        cls.vocabsize=SimpleGPTTrainer.build_vocab(cls.chars)
-        cls.stoi=SimpleGPTTrainer.stoi(cls.chars)
-        cls.itos=SimpleGPTTrainer.itos(cls.chars)
-
+        cls.dataset = SimpleGPTTrainer.load_data(abs_file_path)
+        cls.chars = SimpleGPTTrainer.unique_chars(cls.dataset)
+        cls.vocabsize = SimpleGPTTrainer.build_vocab(cls.chars)
+        cls.stoi = SimpleGPTTrainer.stoi(cls.chars)
+        cls.itos = SimpleGPTTrainer.itos(cls.chars)
 
     def test_simple_gpt_trainer(self):
-
-        encoder=SimpleGPTTrainer.encoder(self.stoi)
+        encoder = SimpleGPTTrainer.encoder(self.stoi)
         # decoder=SimpleGPTTrainer.decoder(self.itos)
-        
-        ds=encoder(self.dataset)
 
-        train_data, val_data=SimpleGPTTrainer.split_to_train_validate(ds, 0.9)
+        ds = encoder(self.dataset)
 
-        model=SimpleGPT(self.vocabsize)
-        optimizer=SimpleGPTTrainer.adam_optimizer(model)
+        train_data, val_data = SimpleGPTTrainer.split_to_train_validate(ds, 0.9)
 
-        SimpleGPTTrainer.train(model, optimizer,train_data, val_data)
+        model = SimpleGPT(self.vocabsize)
+        optimizer = SimpleGPTTrainer.adam_optimizer(model)
 
-        output=SimpleGPTTrainer.sample(model, 100)
+        SimpleGPTTrainer.train(model, optimizer, train_data, val_data)
 
-        decoder=SimpleGPTTrainer.decoder(self.itos)
-        output=decoder(output)
-        
+        output = SimpleGPTTrainer.sample(model, 100)
+
+        decoder = SimpleGPTTrainer.decoder(self.itos)
+        output = decoder(output)
+
         self.assertTrue(output)
-
-
-
-
-

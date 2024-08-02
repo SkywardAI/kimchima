@@ -37,6 +37,10 @@ install:
 install-dev:
 	@poetry install --only dev -vvv --no-root
 
+.PHONY: format
+format:
+	@ruff format
+
 .PHONY: lint
 lint:
 	@ruff check --output-format=github .
