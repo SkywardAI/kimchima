@@ -17,15 +17,18 @@ from typing import Any
 import torch
 from torch.utils.tensorboard import SummaryWriter
 
+
 class SimpleTrainer:
     def __init__(self, **kwargs):
-        self.model: Any=kwargs.get('model') or None
-        self.loss_func: Any=kwargs.get('loss_func') or None
-        self.optimizer: Any=kwargs.get('optimizer') or None
+        self.model: Any = kwargs.get("model") or None
+        self.loss_func: Any = kwargs.get("loss_func") or None
+        self.optimizer: Any = kwargs.get("optimizer") or None
         self.writer: Any = SummaryWriter()
-        assert (self.model and self.loss_func and self.optimizer), "Model, Loss Function and Optimizer are required"
+        assert (
+            self.model and self.loss_func and self.optimizer
+        ), "Model, Loss Function and Optimizer are required"
 
-    def train(self, x:torch.Tensor, y:torch.Tensor)-> None:
+    def train(self, x: torch.Tensor, y: torch.Tensor) -> None:
         for epoch in range(10):
             y1 = self.model(x)
             loss = self.loss_func(y1, y)

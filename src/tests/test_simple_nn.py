@@ -19,18 +19,17 @@ from trainers.simple_trainer import SimpleTrainer
 
 
 class TestSimpleNN(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls) -> None:
         cls.model = torch.nn.Linear(1, 1)
         cls.criterion = torch.nn.MSELoss()
         cls.optimizer = torch.optim.SGD(cls.model.parameters(), lr=0.1)
 
-    
     def test_simple_trainer(self):
         x = torch.arange(-5, 5, 0.1).view(-1, 1)
         y = -5 * x + 0.1 * torch.randn(x.size())
-        trainer=SimpleTrainer(model=self.model, loss_func=self.criterion, optimizer=self.optimizer)
+        trainer = SimpleTrainer(
+            model=self.model, loss_func=self.criterion, optimizer=self.optimizer
+        )
         self.assertTrue(trainer)
         trainer.train(x, y)
-
