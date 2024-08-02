@@ -35,7 +35,7 @@ install:
 
 .PHONY: install-dev
 install-dev:
-	@poetry install -vvv --no-root
+	@poetry install --only dev -vvv --no-root
 
 .PHONY: lint
 lint:

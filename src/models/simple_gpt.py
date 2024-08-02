@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-class SimpleNN:
+class SimpleGPT:
     def __init__(self):
         pass
 
