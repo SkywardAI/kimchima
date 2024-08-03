@@ -67,6 +67,8 @@ source:
 	@poetry config repositories.source https://pypi.org/project/kimchima
 
 
+.PHONY: prepare
+prepare: poetry install-dev
 
 ###################################################################################################
 # Commit and recommit changes to github

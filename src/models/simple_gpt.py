@@ -19,6 +19,7 @@ import torch.nn as nn
 from torch.nn import functional as F
 from torch.utils.tensorboard import SummaryWriter
 
+# https://www.kaggle.com/code/aisuko/gpt-from-scratch-as-a-script
 
 class SimpleGPT(nn.Module):
     def __init__(self, vocab_size):
