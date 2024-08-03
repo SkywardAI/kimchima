@@ -40,9 +40,11 @@ class TestMLPBatchNorm(unittest.TestCase):
         cls.unique_chars=MlpBatchNormTrainer.unique_chars(cls.data.splitlines())
         cls.stoi=MlpBatchNormTrainer.stoi(cls.unique_chars)
         cls.itos=MlpBatchNormTrainer.itos(cls.unique_chars)
-        cls.vocab_size=MlpBatchNormTrainer.build_vocab(cls.unique_chars)
+        cls.vocab_size=MlpBatchNormTrainer.build_vocab(cls.itos)
 
     def test_mlp_batchnorm_trainer(self):
+
+        self.assertEqual(self.vocab_size,27)
         random.seed(42)
         words=self.data.splitlines()
         random.shuffle(words)
@@ -54,8 +56,10 @@ class TestMLPBatchNorm(unittest.TestCase):
         Xdev, Ydev=MlpBatchNormTrainer.build_dataset(words[n1:n2],self.stoi) # 10%
         Xte, Yte=MlpBatchNormTrainer.build_dataset(words[n2:],self.stoi) # 10%
         g=torch.Generator().manual_seed(2147483647)
-
+        self.assertEqual(self.n_embd, 10)
         C=torch.randn((self.vocab_size, self.n_embd), generator=g)
+        
+        self.assertEqual(C.shape, torch.Size([27, 10]))
 
         # sequential 6 MLP layers
         layers=[
@@ -125,7 +129,9 @@ class TestMLPBatchNorm(unittest.TestCase):
             if i>=1000:
                 break
 
-
+        for layer in layers:
+            layer.training=False
+            
         g=torch.Generator().manual_seed(2147483647+10)
 
         for _ in range(20):
@@ -138,7 +144,8 @@ class TestMLPBatchNorm(unittest.TestCase):
                 for layer in layers:
                     x=layer(x)
                 logits=x
-                probs=F.softmax(logits, dim=-1)
+                probs=F.softmax(logits, dim=1)
+                self.assertEqual(probs.shape, torch.Size([1, 27]))
                 # sample from the distribution
                 ix=torch.multinomial(probs, num_samples=1, generator=g).item()
                 # shift the contetx window and track the samples
@@ -146,4 +153,4 @@ class TestMLPBatchNorm(unittest.TestCase):
                 out.append(ix)
                 if ix==0:
                     break
-            print(''.join(self.itos[i] for i in out[:-1]))
+            self.assertIsNotNone(''.join(self.itos[i] for i in out[:-1]))
